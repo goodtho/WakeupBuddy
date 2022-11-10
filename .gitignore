@@ -1,0 +1,16 @@
+src/App/*.iml
+src/App/.gradle
+src/App/local.properties
+src/App/.idea/caches
+src/App/.idea/libraries
+src/App/.idea/modules.xml
+src/App/.idea/workspace.xml
+src/App/.idea/navEditor.xml
+src/App/.idea/assetWizardSettings.xml
+src/App/.DS_Store
+src/App/build
+src/App/captures
+src/App/.externalNativeBuild
+src/App/.cxx
+src/App/local.properties
+src/App/.idea
