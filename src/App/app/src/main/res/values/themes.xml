@@ -62,9 +62,9 @@
 
     </style>
 
-    <style name="NextButton">
-        <item name="android:background">@drawable/next_button</item>
-
+    <style name="NextButton" parent="ThemeOverlay.AppCompat">
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>
