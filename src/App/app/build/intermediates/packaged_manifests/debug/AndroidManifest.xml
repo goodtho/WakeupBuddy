@@ -21,6 +21,13 @@
         android:testOnly="true"
         android:theme="@style/Theme.WakeupBuddy" >
         <activity
+            android:name="com.example.wakeupbuddy.SetAlarmTime"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name="com.example.wakeupbuddy.HomeActivity"
             android:exported="false" >
             <meta-data
@@ -54,6 +61,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"

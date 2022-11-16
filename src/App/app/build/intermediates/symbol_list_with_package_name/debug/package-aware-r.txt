@@ -66,6 +66,10 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 attr SharedValue
 attr SharedValueId
 attr actionBarDivider
@@ -1263,6 +1267,7 @@ color accent_material_dark
 color accent_material_light
 color androidx_core_ripple_material_light
 color androidx_core_secondary_text_default_material_light
+color background
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -1836,6 +1841,7 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color shadow
 color switch_thumb_disabled_material_dark
 color switch_thumb_disabled_material_light
 color switch_thumb_material_dark
@@ -2563,6 +2569,10 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable ic_account
+drawable ic_baseline_add_alarm_24
+drawable ic_baseline_home_24
+drawable ic_baseline_people_24
+drawable ic_baseline_settings_24
 drawable ic_circle_account
 drawable ic_clock_black_24dp
 drawable ic_email
@@ -2638,6 +2648,7 @@ drawable mtrl_switch_track
 drawable mtrl_switch_track_decoration
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
+drawable next_button
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -2654,6 +2665,9 @@ drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 font montserrat
+font roboto
+font roboto_thin
+font robotoregular
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -2725,6 +2739,8 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
+id add_alarm
+id add_friends
 id alertTitle
 id aligned
 id all
@@ -2748,6 +2764,7 @@ id beginning
 id bestChoice
 id blocking
 id bottom
+id bottomNavigationView
 id bounce
 id bounceBoth
 id bounceEnd
@@ -2756,6 +2773,7 @@ id btn_lglogin
 id btn_login
 id btn_logout
 id btn_signup
+id button4
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -2859,6 +2877,7 @@ id floating
 id forever
 id forgot_pw
 id fragment_container_view_tag
+id frame_layout
 id frost
 id fullscreen_header
 id ghost_view
@@ -2876,6 +2895,7 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id home_appliances
 id home_subtitle
 id home_title
 id honorRequest
@@ -3039,6 +3059,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id settings
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3099,6 +3120,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3277,6 +3299,7 @@ layout abc_tooltip
 layout activity_home
 layout activity_login
 layout activity_main
+layout activity_set_alarm_time
 layout activity_signup
 layout custom_dialog
 layout design_bottom_navigation_item
@@ -3294,6 +3317,10 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_add_alarm
+layout fragment_friends
+layout fragment_myhome
+layout fragment_settings
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title
@@ -3352,6 +3379,7 @@ layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
+menu navigation_bar
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -3514,8 +3542,6 @@ string signup_email
 string signup_have_acc
 string signup_title
 string signup_username
-string started_subtitle
-string started_title
 string status_bar_notification_info_overflow
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
@@ -3787,7 +3813,7 @@ style Base_Widget_MaterialComponents_Snackbar
 style Base_Widget_MaterialComponents_TextInputEditText
 style Base_Widget_MaterialComponents_TextInputLayout
 style Base_Widget_MaterialComponents_TextView
-style ButtonGreen
+style ButtonBlack
 style ButtonWhite
 style CardView
 style CardView_Dark
@@ -3811,6 +3837,7 @@ style MaterialAlertDialog_MaterialComponents_Title_Panel
 style MaterialAlertDialog_MaterialComponents_Title_Panel_CenterStacked
 style MaterialAlertDialog_MaterialComponents_Title_Text
 style MaterialAlertDialog_MaterialComponents_Title_Text_CenterStacked
+style NextButton
 style Platform_AppCompat
 style Platform_AppCompat_Light
 style Platform_MaterialComponents

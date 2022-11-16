@@ -24,7 +24,8 @@
     </string>
     <string name="btn_logout">Logout</string>
     <string name="home_title">Wake Up Buddy</string>
-    <string name="home_subtitle">That\'s the home screen of the app</string>
+    <string name="home_subtitle">That\'s the add alarm screen </string>
+
 
 
 </resources>
