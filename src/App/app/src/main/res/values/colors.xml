@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     //used colors
     <color name="background">#E6EBEF</color>
+    <color name="shadow">#B8C4CC</color>
     <color name="primary_color">#1e81b0</color>
     <color name="grey">#888888 </color>
     <color name="light_grey">#F0F0F0</color>
