@@ -61,4 +61,10 @@
         <item name="android:fontFamily">@font/robotoregular</item>
 
     </style>
+
+    <style name="NextButton">
+        <item name="android:background">@drawable/next_button</item>
+
+    </style>
+
 </resources>
