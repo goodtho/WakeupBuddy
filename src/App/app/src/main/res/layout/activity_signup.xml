@@ -130,7 +130,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_signup"
-        style="@style/ButtonGreen"
+        style="@style/ButtonBlack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
