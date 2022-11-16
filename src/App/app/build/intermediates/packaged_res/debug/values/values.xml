@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000000</color>
+    <color name="grey">#888888 </color>
+    <color name="light_grey">#F0F0F0</color>
+    <color name="primary_color">#1e81b0</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">WakeupBuddy</string>
+    <string name="btn_lglogin">Login with LG account</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_logout">Logout</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="hint_email">Enter your email or username</string>
+    <string name="hint_name">Enter your name</string>
+    <string name="home_subtitle">That\'s the home screen of the app</string>
+    <string name="home_title">Wake Up Buddy</string>
+    <string name="illustration_img">Illustration Image</string>
+    <string name="login_forgot_pw">Forgot Password?</string>
+    <string name="login_havent_acc">
+        Don\'t have an account? <font color="#00C9B8"><b>Sign Up</b></font>
+    </string>
+    <string name="login_password">Enter your password</string>
+    <string name="login_title">Log into your account</string>
+    <string name="signup_confirm_password">Confirm password</string>
+    <string name="signup_email">Enter your email</string>
+    <string name="signup_have_acc">
+        An existing user? <font color="#00C9B8"><b>Login</b></font>
+    </string>
+    <string name="signup_title">Create an account</string>
+    <string name="signup_username">Enter your username</string>
+    <string name="started_subtitle">
+        Nice to meet you, come join our community!
+        <br><b>Login</b> if you already have an account</br>
+        <br><b>Sign Up</b> to get started with the app.</br>
+    </string>
+    <string name="started_title">Hello You!</string>
+    <style name="ButtonGreen">
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:backgroundTint">@color/primary_color</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+    <style name="ButtonWhite">
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/primary_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+    <style name="SubTitle">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="TextInputEditText" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:background">@drawable/bg_text_field</item>
+        <item name="android:fontFamily">@font/montserrat</item>
+
+    </style>
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="hintTextColor">@color/light_grey</item>
+        <item name="startIconTint">@color/primary_color</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        
+    </style>
+    <style name="Theme.WakeupBuddy" parent="Theme.MaterialComponents.DayNight.NoActionBar"> //changed dark action to no action
+        
+        <item name="colorPrimary">@color/primary_color</item> //modified
+        <item name="colorPrimaryVariant">@color/primary_color</item> //modified
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+    </style>
+    <style name="Title">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+</resources>

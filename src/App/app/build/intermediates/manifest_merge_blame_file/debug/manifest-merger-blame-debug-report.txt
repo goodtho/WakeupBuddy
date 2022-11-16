@@ -1,0 +1,122 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.wakeupbuddy"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml
+10
+11    <application
+11-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:5:5-49:19
+12        android:allowBackup="true"
+12-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:6:9-35
+13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+13-->[androidx.core:core:1.8.0] C:\Users\ahsha\.gradle\caches\transforms-3\6a19de105318aab1da00cfa3c60fb56e\transformed\core-1.8.0\AndroidManifest.xml:24:18-86
+14        android:dataExtractionRules="@xml/data_extraction_rules"
+14-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:7:9-65
+15        android:debuggable="true"
+16        android:fullBackupContent="@xml/backup_rules"
+16-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:8:9-54
+17        android:icon="@mipmap/ic_launcher"
+17-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:9:9-43
+18        android:label="@string/app_name"
+18-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:10:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:11:9-54
+20        android:supportsRtl="true"
+20-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:12:9-35
+21        android:testOnly="true"
+22        android:theme="@style/Theme.WakeupBuddy" >
+22-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:13:9-49
+23        <activity
+23-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:15:9-21:20
+24            android:name="com.example.wakeupbuddy.HomeActivity"
+24-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:16:13-41
+25            android:exported="false" >
+25-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:17:13-37
+26            <meta-data
+26-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:18:13-20:36
+27                android:name="android.app.lib_name"
+27-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:19:17-52
+28                android:value="" />
+28-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:20:17-33
+29        </activity>
+30        <activity
+30-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:22:9-28:20
+31            android:name="com.example.wakeupbuddy.SignupActivity"
+31-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:23:13-43
+32            android:exported="false" >
+32-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:24:13-37
+33            <meta-data
+33-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:18:13-20:36
+34                android:name="android.app.lib_name"
+34-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:19:17-52
+35                android:value="" />
+35-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:20:17-33
+36        </activity>
+37        <activity
+37-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:29:9-35:20
+38            android:name="com.example.wakeupbuddy.LoginActivity"
+38-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:30:13-42
+39            android:exported="false" >
+39-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:31:13-37
+40            <meta-data
+40-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:18:13-20:36
+41                android:name="android.app.lib_name"
+41-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:19:17-52
+42                android:value="" />
+42-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:20:17-33
+43        </activity>
+44        <activity
+44-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:36:9-48:20
+45            android:name="com.example.wakeupbuddy.MainActivity"
+45-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:37:13-41
+46            android:exported="true" >
+46-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:38:13-36
+47            <intent-filter>
+47-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:39:13-43:29
+48                <action android:name="android.intent.action.MAIN" />
+48-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:40:17-69
+48-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:40:25-66
+49
+50                <category android:name="android.intent.category.LAUNCHER" />
+50-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:42:17-77
+50-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:42:27-74
+51            </intent-filter>
+52
+53            <meta-data
+53-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:18:13-20:36
+54                android:name="android.app.lib_name"
+54-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:19:17-52
+55                android:value="" />
+55-->D:\WakeupBuddy\src\App\app\src\main\AndroidManifest.xml:20:17-33
+56        </activity>
+57
+58        <provider
+58-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ahsha\.gradle\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+59            android:name="androidx.startup.InitializationProvider"
+59-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ahsha\.gradle\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+60            android:authorities="com.example.wakeupbuddy.androidx-startup"
+60-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ahsha\.gradle\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+61            android:exported="false" >
+61-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ahsha\.gradle\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+62            <meta-data
+62-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ahsha\.gradle\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+63                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+63-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ahsha\.gradle\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+64                android:value="androidx.startup" />
+64-->[androidx.emoji2:emoji2:1.2.0] C:\Users\ahsha\.gradle\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+65            <meta-data
+65-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\ahsha\.gradle\caches\transforms-3\a4f0fb44e9b56370f8c2ed23c9d5d030\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+66                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+66-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\ahsha\.gradle\caches\transforms-3\a4f0fb44e9b56370f8c2ed23c9d5d030\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+67                android:value="androidx.startup" />
+67-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\ahsha\.gradle\caches\transforms-3\a4f0fb44e9b56370f8c2ed23c9d5d030\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+68        </provider>
+69    </application>
+70
+71</manifest>
