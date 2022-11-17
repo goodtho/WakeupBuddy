@@ -48,14 +48,13 @@
         style="@style/buttonHomeAppliances"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="272dp"
         android:layout_marginEnd="175dp"
+        android:paddingTop="50dp"
         android:stateListAnimator="@null"
         android:text="Coffee Machine"
-        android:paddingTop="50dp"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,6 +94,19 @@
         android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        style="@style/buttonHomeAppliances"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="525dp"
+        android:layout_marginEnd="175dp"
+        android:src="@drawable/img_2"
+        android:text="Coffee Machine"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -146,6 +158,8 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
