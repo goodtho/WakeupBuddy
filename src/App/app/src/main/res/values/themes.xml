@@ -68,4 +68,13 @@
       
     </style>
 
+    <style name="buttonHomeAppliances" parent="ThemeOverlay.AppCompat">
+        <item name="android:background">@drawable/button_home_appliances</item>
+        <item name="android:fontFamily">@font/robotoregular</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+
 </resources>
