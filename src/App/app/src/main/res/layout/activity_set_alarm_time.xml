@@ -7,7 +7,13 @@
     tools:context=".SetAlarmTime"
     android:background="@color/background">
 
+    <TimePicker
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="207dp">
 
+    </TimePicker>
 
     <TextView
         android:id="@+id/headerSetTime"
@@ -23,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+<!--
     <TextView
         android:id="@+id/timeDisplay"
         android:layout_width="wrap_content"
@@ -36,7 +42,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+-->
 
 
     <Button
@@ -53,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+<!--
     <ImageView
         android:id="@+id/clock"
         android:layout_width="250dp"
@@ -63,20 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/setTimeButton"
-        style="@style/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        android:fontFamily="@font/roboto_light"
-        android:text="07:00"
-        android:textSize="70sp"
-        android:stateListAnimator="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
