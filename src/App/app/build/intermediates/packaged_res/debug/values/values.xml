@@ -16,6 +16,8 @@
     </string-array>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/roboto</item>
+        <item>@font/roboto_light</item>
+        <item>@font/roboto_medium</item>
         <item>@font/roboto_thin</item>
     </array>
     <color name="background">#E6EBEF</color>
@@ -70,10 +72,6 @@
         <item name="android:textStyle">bold</item>
 
     </style>
-    <style name="NextButton" parent="ThemeOverlay.AppCompat">
-        <item name="android:backgroundTint">@color/background</item>
-        <item name="android:textColor">@color/black</item>
-    </style>
     <style name="SubTitle">
         <item name="android:fontFamily">@font/robotoregular</item>
         <item name="android:textColor">@color/black</item>
@@ -111,5 +109,19 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
 
+    </style>
+    <style name="buttonHomeAppliances" parent="ThemeOverlay.AppCompat">
+        <item name="android:background">@drawable/button_home_appliances</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:fontFamily">@font/robotoregular</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:imageButtonStyle">@drawable/img_2</item>
+
+    </style>
+    <style name="nextButton" parent="ThemeOverlay.AppCompat">
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="android:textColor">@color/black</item>
+      
     </style>
 </resources>

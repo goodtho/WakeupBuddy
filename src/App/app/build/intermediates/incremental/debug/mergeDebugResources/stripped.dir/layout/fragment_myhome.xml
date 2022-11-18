@@ -1,16 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".myhome"
     android:background="@color/background">
 
+
     <TextView
+        android:id="@+id/headerHomeDevices"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Appliances Fragment"
-        android:textSize="26dp"
-        android:layout_gravity="center"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="35dp"
+        android:text="Home Devices"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/containerHomeAppliance1"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="175dp"
+        android:src="@drawable/container_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/containerHomeAppliance2"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="125dp"
+        android:src="@drawable/container_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonHomeAppliance1"
+        style="@style/buttonHomeAppliances"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="272dp"
+        android:layout_marginEnd="175dp"
+        android:paddingTop="50dp"
+        android:stateListAnimator="@null"
+        android:text="Coffee Machine"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonHomeAppliance2"
+        style="@style/buttonHomeAppliances"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="275dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonHomeAppliance3"
+        style="@style/buttonHomeAppliances"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="400dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonHomeAppliance4"
+        style="@style/buttonHomeAppliances"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="175dp"
+        android:stateListAnimator="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        style="@style/buttonHomeAppliances"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="525dp"
+        android:layout_marginEnd="175dp"
+        android:src="@drawable/img_2"
+        android:text="Coffee Machine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="250dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Favorites"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textMyDevices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="250dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="My Devices"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/clock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timeLeftCorner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="10:21"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2563,6 +2563,8 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable button_home_appliances
+drawable container_white
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2588,6 +2590,9 @@ drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
 drawable illustration_started
+drawable img
+drawable img_1
+drawable img_2
 drawable logo
 drawable logo2
 drawable logo3
@@ -2666,6 +2671,8 @@ drawable tooltip_frame_dark
 drawable tooltip_frame_light
 font montserrat
 font roboto
+font roboto_light
+font roboto_medium
 font roboto_thin
 font robotoregular
 id ALT
@@ -2773,7 +2780,10 @@ id btn_lglogin
 id btn_login
 id btn_logout
 id btn_signup
-id button4
+id buttonHomeAppliance1
+id buttonHomeAppliance2
+id buttonHomeAppliance3
+id buttonHomeAppliance4
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -2794,6 +2804,7 @@ id circle_center
 id clear_text
 id clip_horizontal
 id clip_vertical
+id clock
 id clockwise
 id closest
 id collapseActionView
@@ -2801,6 +2812,8 @@ id compress
 id confirm_button
 id constraint
 id container
+id containerHomeAppliance1
+id containerHomeAppliance2
 id content
 id contentPanel
 id contiguous
@@ -2891,6 +2904,8 @@ id groups
 id guideline
 id have_acc
 id havent_acc
+id headerHomeDevices
+id headerSetTime
 id header_title
 id hideable
 id home
@@ -2906,6 +2921,7 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
+id imageButton
 id img_illustration
 id immediateStop
 id included
@@ -2995,6 +3011,7 @@ id navigation_header_container
 id never
 id neverCompleteToEnd
 id neverCompleteToStart
+id nextButton
 id noScroll
 id noState
 id none
@@ -3116,11 +3133,12 @@ id tag_window_insets_animation_callback
 id text
 id text2
 id textEnd
+id textFavorites
+id textMyDevices
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
-id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3136,6 +3154,7 @@ id til_name
 id til_password
 id til_username
 id time
+id timeLeftCorner
 id title
 id titleDividerNoCustom
 id title_template
@@ -3837,7 +3856,6 @@ style MaterialAlertDialog_MaterialComponents_Title_Panel
 style MaterialAlertDialog_MaterialComponents_Title_Panel_CenterStacked
 style MaterialAlertDialog_MaterialComponents_Title_Text
 style MaterialAlertDialog_MaterialComponents_Title_Text_CenterStacked
-style NextButton
 style Platform_AppCompat
 style Platform_AppCompat_Light
 style Platform_MaterialComponents
@@ -4601,6 +4619,8 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style buttonHomeAppliances
+style nextButton
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth

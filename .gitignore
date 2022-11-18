@@ -9,6 +9,7 @@ src/App/.idea/navEditor.xml
 src/App/.idea/assetWizardSettings.xml
 src/App/.DS_Store
 src/App/build
+src/App/app/build
 src/App/captures
 src/App/.externalNativeBuild
 src/App/.cxx

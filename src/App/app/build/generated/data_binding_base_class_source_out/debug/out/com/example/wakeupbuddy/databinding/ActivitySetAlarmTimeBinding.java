@@ -21,16 +21,16 @@ public final class ActivitySetAlarmTimeBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
-  public final Button button4;
+  public final TextView headerSetTime;
 
   @NonNull
-  public final TextView textView;
+  public final Button nextButton;
 
-  private ActivitySetAlarmTimeBinding(@NonNull ConstraintLayout rootView, @NonNull Button button4,
-      @NonNull TextView textView) {
+  private ActivitySetAlarmTimeBinding(@NonNull ConstraintLayout rootView,
+      @NonNull TextView headerSetTime, @NonNull Button nextButton) {
     this.rootView = rootView;
-    this.button4 = button4;
-    this.textView = textView;
+    this.headerSetTime = headerSetTime;
+    this.nextButton = nextButton;
   }
 
   @Override
@@ -60,19 +60,20 @@ public final class ActivitySetAlarmTimeBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.button4;
-      Button button4 = ViewBindings.findChildViewById(rootView, id);
-      if (button4 == null) {
+      id = R.id.headerSetTime;
+      TextView headerSetTime = ViewBindings.findChildViewById(rootView, id);
+      if (headerSetTime == null) {
         break missingId;
       }
 
-      id = R.id.textView;
-      TextView textView = ViewBindings.findChildViewById(rootView, id);
-      if (textView == null) {
+      id = R.id.nextButton;
+      Button nextButton = ViewBindings.findChildViewById(rootView, id);
+      if (nextButton == null) {
         break missingId;
       }
 
-      return new ActivitySetAlarmTimeBinding((ConstraintLayout) rootView, button4, textView);
+      return new ActivitySetAlarmTimeBinding((ConstraintLayout) rootView, headerSetTime,
+          nextButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

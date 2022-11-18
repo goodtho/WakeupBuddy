@@ -4,8 +4,8 @@
         "source": "com.example.wakeupbuddy.app-main-31:/layout/fragment_friends.xml"
     },
     {
-        "merged": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-mergeDebugResources-28:\\layout\\activity_signup.xml",
-        "source": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-main-31:\\layout\\activity_signup.xml"
+        "merged": "com.example.wakeupbuddy.app-mergeDebugResources-28:/layout/activity_main.xml",
+        "source": "com.example.wakeupbuddy.app-main-31:/layout/activity_main.xml"
     },
     {
         "merged": "com.example.wakeupbuddy.app-mergeDebugResources-28:/layout/fragment_settings.xml",
@@ -16,24 +16,20 @@
         "source": "com.example.wakeupbuddy.app-main-31:/layout/activity_home.xml"
     },
     {
-        "merged": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-mergeDebugResources-28:\\layout\\activity_login.xml",
-        "source": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-main-31:\\layout\\activity_login.xml"
-    },
-    {
         "merged": "com.example.wakeupbuddy.app-mergeDebugResources-28:/layout/fragment_myhome.xml",
         "source": "com.example.wakeupbuddy.app-main-31:/layout/fragment_myhome.xml"
     },
     {
-        "merged": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-mergeDebugResources-28:\\layout\\activity_main.xml",
-        "source": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-main-31:\\layout\\activity_main.xml"
+        "merged": "com.example.wakeupbuddy.app-mergeDebugResources-28:/layout/activity_set_alarm_time.xml",
+        "source": "com.example.wakeupbuddy.app-main-31:/layout/activity_set_alarm_time.xml"
     },
     {
-        "merged": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-mergeDebugResources-28:\\layout\\activity_set_alarm_time.xml",
-        "source": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-main-31:\\layout\\activity_set_alarm_time.xml"
+        "merged": "com.example.wakeupbuddy.app-mergeDebugResources-28:/layout/activity_login.xml",
+        "source": "com.example.wakeupbuddy.app-main-31:/layout/activity_login.xml"
     },
     {
-        "merged": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-mergeDebugResources-28:\\layout\\activity_home.xml",
-        "source": "C:\\Users\\ahsha\\.gradle\\daemon\\7.4\\com.example.wakeupbuddy.app-main-31:\\layout\\activity_home.xml"
+        "merged": "com.example.wakeupbuddy.app-mergeDebugResources-28:/layout/activity_signup.xml",
+        "source": "com.example.wakeupbuddy.app-main-31:/layout/activity_signup.xml"
     },
     {
         "merged": "com.example.wakeupbuddy.app-mergeDebugResources-28:/layout/fragment_add_alarm.xml",
