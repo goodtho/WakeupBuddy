@@ -3,6 +3,7 @@ src/App/.gradle
 src/App/local.properties
 src/App/.DS_Store
 src/App/build
+src/App/app/build
 src/App/captures
 src/App/.externalNativeBuild
 src/App/.cxx
