@@ -25,7 +25,9 @@
     <string name="btn_logout">Logout</string>
     <string name="home_title">Wake Up Buddy</string>
     <string name="home_subtitle">That\'s the add alarm screen </string>
-
+    <string name="home_greeting">Hello user!</string>
+    <string name="add_button">+</string>
+    <string name="home_alarm_list_title">My Alarms</string>
 
 
 </resources>

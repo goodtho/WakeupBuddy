@@ -21,6 +21,10 @@ class add_alarm : Fragment() {
             val intent = Intent(this@add_alarm.requireContext(), LoginActivity::class.java)
             startActivity(intent)
         }
+        binding.button.setOnClickListener {
+            val intent = Intent(this@add_alarm.requireContext(), SetAlarmTime::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 
