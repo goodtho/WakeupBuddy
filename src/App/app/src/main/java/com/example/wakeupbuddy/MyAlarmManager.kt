@@ -4,7 +4,9 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.Ringtone
 import android.media.RingtoneManager
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,13 +20,13 @@ import java.util.*
 
 class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
-    private val alarmList: ArrayList<Alarm>
+    private val alarmList: ArrayList<Alarm> = ArrayList()
     private var alarmManager: AlarmManager
+    private lateinit var ringtone: Ringtone
 
     init {
         //todo get all alarms of the user from the database
 
-        alarmList = ArrayList()
         alarmList.add(Alarm(name="Alarm 1", date=Calendar.getInstance()))
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.MINUTE, 10)
@@ -32,9 +34,9 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
+        setRingtone() //set default ringtone
+
         //todo add alarm implementieren
-        //todo alarm oberfläche/xml implementieren
-        //todo alarm ausschalten implementieren
 
     }
 
@@ -86,7 +88,21 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
         alarmManager.cancel(pendingIntent)
 
+        ringtone.stop()
+
         println("Alarm stopped")
+    }
+
+    fun setRingtone(type: Int = RingtoneManager.TYPE_ALARM) {
+        var notification: Uri? = RingtoneManager.getDefaultUri(type)
+        if (notification == null) {
+            notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        }
+        ringtone = RingtoneManager.getRingtone(context, notification)
+    }
+
+    fun playRingtone() {
+        ringtone.play()
     }
 
 }

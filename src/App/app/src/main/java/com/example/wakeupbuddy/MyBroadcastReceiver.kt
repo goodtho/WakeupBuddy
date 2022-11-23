@@ -1,6 +1,5 @@
 package com.example.wakeupbuddy
 
-import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -44,12 +43,10 @@ class MyBroadcastReceiver : BroadcastReceiver() {
 
             // set and play ringtone
             val wkbApp = context.applicationContext as WakeUpBuddyApp
-            wkbApp.setRingtone()
-            val ringtone = wkbApp.getRingtone()
-            ringtone.play()
+            wkbApp.getMyAlarmManager().playRingtone()
 
             // initialize specific alarm activity
-            val alarmIntent = Intent(context!!.applicationContext, AlarmActivity::class.java)
+            val alarmIntent = Intent(context.applicationContext, AlarmActivity::class.java)
             alarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
             context.startActivity(alarmIntent)

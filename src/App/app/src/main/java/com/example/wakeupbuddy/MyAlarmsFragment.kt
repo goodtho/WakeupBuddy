@@ -32,6 +32,8 @@ class MyAlarmsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val alarmListView: ListView = view.alarm_list
-        alarmListView.adapter = MyAlarmManager(this@MyAlarmsFragment.requireContext())
+        val wkbApp = context?.applicationContext as WakeUpBuddyApp
+        wkbApp.initializeMyAlarmManager(this@MyAlarmsFragment.requireContext())
+        alarmListView.adapter = wkbApp.getMyAlarmManager()
     }
 }
