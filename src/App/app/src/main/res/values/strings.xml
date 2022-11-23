@@ -28,6 +28,7 @@
     <string name="home_greeting">Hello user!</string>
     <string name="add_button">+</string>
     <string name="home_alarm_list_title">My Alarms</string>
+    <string name="set_alarm_title">Set Time</string>
 
 
 </resources>
