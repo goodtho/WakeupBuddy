@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/> <!-- Needed permission granted by the os to set exact alarms -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/> <!-- Permission to receive broadcast of the boot up completion of the smartphone -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +17,7 @@
         android:theme="@style/Theme.WakeupBuddy"
         tools:targetApi="31">
         <activity
-            android:name=".SetAlarmTime"
+            android:name=".SetAlarmActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -57,6 +61,17 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <receiver android:name=".MyBroadcastReceiver"
+            android:exported="true">
+            <!-- exported must be true so that the receiver receives messages from outside the app -->
+            <intent-filter>
+                <action android:name="com.wakeupbuddy.alarm"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

@@ -1,0 +1,91 @@
+package com.example.wakeupbuddy
+
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.CompoundButton
+import android.widget.TextView
+import androidx.appcompat.widget.SwitchCompat
+import kotlinx.android.synthetic.main.row_item_alarm.view.*
+import java.util.Calendar
+
+class MyAlarmManager(private val context: Context) : BaseAdapter() {
+
+    private val alarmList: ArrayList<Alarm>
+    private lateinit var alarmManager: AlarmManager
+
+    init {
+        //todo get all alarms of the user from the database
+
+        alarmList = ArrayList()
+        alarmList.add(Alarm(name="Alarm 1", date=Calendar.getInstance()))
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MINUTE, 10)
+        alarmList.add(Alarm(name="Alarm 2", date=calendar))
+
+        alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        //todo create structure: listview <-> adapter <-> MyAlarmManager, MyBroadcastReceicer <-> ...
+
+    }
+
+    override fun getCount(): Int {
+        return  alarmList.size
+    }
+
+    override fun getItem(position: Int): Any {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.row_item_alarm, parent, false)
+
+        val alarmNameTextView: TextView = view.alarm_name
+        alarmNameTextView.text = alarmList[position].name
+
+        val alarmTimeTextView: TextView = view.alarm_time
+        alarmTimeTextView.text = "${alarmList[position].date.get(Calendar.HOUR)} : ${alarmList[position].date.get(Calendar.MINUTE)}"
+
+        val switchCompat: SwitchCompat = view.alarm_switch
+        switchCompat.setOnCheckedChangeListener { compoundButton: CompoundButton, isChecked: Boolean ->
+            if (isChecked) {
+                println("Postiton: $position & Name: ${alarmList[position].name}")
+                this.activateAlarm(position)
+            } else {
+                this.cancelAlarm(position)
+            }
+        }
+
+        return view
+    }
+
+    fun activateAlarm(position: Int) {
+        val intent = Intent(context, MyBroadcastReceiver::class.java)
+        intent.putExtra("name", alarmList[position].name)
+        intent.action = "com.wakeupbuddy.alarm"
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmList[position].date.timeInMillis, pendingIntent)
+        println("Alarm ${alarmList[position].name} activated")
+    }
+
+    fun cancelAlarm(position: Int) {
+        val intent = Intent(context, MyBroadcastReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        alarmManager.cancel(pendingIntent)
+        println("Alarm ${alarmList[position].name} canceled")
+    }
+
+    //todo add alarm implementieren
+    //todo alarm oberfläche/xml implementieren
+    //todo alarm ausschalten implementieren
+
+}
