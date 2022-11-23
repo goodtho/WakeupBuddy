@@ -1,20 +1,17 @@
 package com.example.wakeupbuddy
 
+import android.app.Application
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.media.Ringtone
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class MyBroadcastReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
 
-        //todo implement alarm (vibration & sound)
+    override fun onReceive(context: Context?, intent: Intent?) {
 
         println(
             "${
@@ -25,6 +22,7 @@ class MyBroadcastReceiver : BroadcastReceiver() {
             val extras: Bundle = intent.extras as Bundle
             println("Alarm ${extras.get("name")} is ringing!")
 
+            // set and start vibration
             if (Build.VERSION.SDK_INT >= 31) {
                 val effectId: Int = VibrationEffect.Composition.PRIMITIVE_LOW_TICK
                 val vibratorManager: VibratorManager =
@@ -34,7 +32,9 @@ class MyBroadcastReceiver : BroadcastReceiver() {
                         CombinedVibration.createParallel(
                             VibrationEffect.startComposition()
                                 .addPrimitive(effectId)
-                                .compose()))
+                                .compose()
+                        )
+                    )
                 }
             } else {
                 //deprecated in API 26
@@ -42,17 +42,23 @@ class MyBroadcastReceiver : BroadcastReceiver() {
                 vibrator.vibrate(500)
             }
 
-            var alarmUri: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-            if (alarmUri == null) {
-                alarmUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            }
-            // setting default ringtone
-            val ringtone: Ringtone = RingtoneManager.getRingtone(context, alarmUri)
-            // play ringtone
+            // set and play ringtone
+            val wkbApp = context.applicationContext as WakeUpBuddyApp
+            wkbApp.setRingtone()
+            val ringtone = wkbApp.getRingtone()
             ringtone.play()
 
-        } else if (intent!!.action.equals("android.intent.action.BOOT_COMPLETED")) {
+            // initialize specific alarm activity
+            val alarmIntent = Intent(context!!.applicationContext, AlarmActivity::class.java)
+            alarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+            context.startActivity(alarmIntent)
+
+        } else if (intent.action.equals("android.intent.action.BOOT_COMPLETED")) {
             println("Boot completed!")
+
+            //todo after booting the smartphone, activate all alarms that are set active
+
         }
     }
 }

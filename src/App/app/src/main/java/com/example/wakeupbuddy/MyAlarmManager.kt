@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.RingtoneManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +13,13 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import kotlinx.android.synthetic.main.row_item_alarm.view.*
-import java.util.Calendar
+import java.util.*
+
 
 class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
     private val alarmList: ArrayList<Alarm>
-    private lateinit var alarmManager: AlarmManager
+    private var alarmManager: AlarmManager
 
     init {
         //todo get all alarms of the user from the database
@@ -30,7 +32,9 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        //todo create structure: listview <-> adapter <-> MyAlarmManager, MyBroadcastReceicer <-> ...
+        //todo add alarm implementieren
+        //todo alarm oberfläche/xml implementieren
+        //todo alarm ausschalten implementieren
 
     }
 
@@ -61,7 +65,7 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
                 println("Postiton: $position & Name: ${alarmList[position].name}")
                 this.activateAlarm(position)
             } else {
-                this.cancelAlarm(position)
+                this.stopAlarm()
             }
         }
 
@@ -77,15 +81,12 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         println("Alarm ${alarmList[position].name} activated")
     }
 
-    fun cancelAlarm(position: Int) {
+    fun stopAlarm() {
         val intent = Intent(context, MyBroadcastReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
         alarmManager.cancel(pendingIntent)
-        println("Alarm ${alarmList[position].name} canceled")
-    }
 
-    //todo add alarm implementieren
-    //todo alarm oberfläche/xml implementieren
-    //todo alarm ausschalten implementieren
+        println("Alarm stopped")
+    }
 
 }
