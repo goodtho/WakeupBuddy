@@ -1,7 +1,6 @@
 package com.example.wakeupbuddy
 
 import android.content.Intent
-import android.os.Binder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.wakeupbuddy.databinding.ActivityMainBinding

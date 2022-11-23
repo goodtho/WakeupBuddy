@@ -1,22 +1,14 @@
 package com.example.wakeupbuddy
 
 import android.app.Application
-import android.media.Ringtone
-import android.media.RingtoneManager
-import android.net.Uri
+import android.content.Context
 
 class WakeUpBuddyApp : Application() {
-    private lateinit var ringtone: Ringtone
+    private lateinit var myAM: MyAlarmManager
 
-    fun getRingtone(): Ringtone {
-        return ringtone
+    fun initializeMyAlarmManager(context: Context) {
+        myAM = MyAlarmManager(context)
     }
 
-    fun setRingtone() {
-        var notification: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-        if (notification == null) {
-            notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        }
-        ringtone = RingtoneManager.getRingtone(this.applicationContext, notification)
-    }
+    fun getMyAlarmManager(): MyAlarmManager = myAM
 }
