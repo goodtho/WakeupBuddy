@@ -41,7 +41,9 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
                 activateAlarm(index)
             }
         }
-        //todo add alarm implementieren
+
+        //todo sort by activation (1) and time (2)
+        //todo make listview scrollable, currently: to many alarms -> layout broken
 
     }
 
