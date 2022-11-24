@@ -16,6 +16,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:padding="20dp"
         android:text="Snooze Alarm"
-        android:onClick="testOnClick"/>
+        android:onClick="stopAlarmButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

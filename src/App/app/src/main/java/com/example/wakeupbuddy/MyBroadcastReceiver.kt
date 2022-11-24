@@ -19,7 +19,7 @@ class MyBroadcastReceiver : BroadcastReceiver() {
         )
         if (intent!!.action.equals("com.wakeupbuddy.alarm")) {
             val extras: Bundle = intent.extras as Bundle
-            println("Alarm ${extras.get("name")} is ringing!")
+            println("Alarm ${extras.get("name")} is ringing!") //todo why are received extras null?
 
             // set and start vibration
             if (Build.VERSION.SDK_INT >= 31) {
@@ -48,6 +48,8 @@ class MyBroadcastReceiver : BroadcastReceiver() {
             // initialize specific alarm activity
             val alarmIntent = Intent(context.applicationContext, AlarmActivity::class.java)
             alarmIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            println("Wert: ${extras.getString("alarm_id")}")
+            alarmIntent.putExtra("alarm_id", extras.getString("alarm_id"))
 
             context.startActivity(alarmIntent)
 
