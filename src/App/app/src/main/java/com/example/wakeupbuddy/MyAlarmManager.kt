@@ -27,10 +27,10 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
     init {
         //todo get all alarms of the user from the database
 
-        alarmList.add(Alarm(name="Alarm 1", date=Calendar.getInstance()))
+        alarmList.add(Alarm("Alarm 1", Calendar.getInstance(), true))
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.MINUTE, 10)
-        alarmList.add(Alarm(name="Alarm 2", date=calendar))
+//        calendar.add(Calendar.MINUTE, 10)
+//        alarmList.add(Alarm("Alarm 2", calendar, true))
 
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -41,7 +41,7 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
     }
 
     override fun getCount(): Int {
-        return  alarmList.size
+        return alarmList.size
     }
 
     override fun getItem(position: Int): Any {
@@ -53,42 +53,72 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.row_item_alarm, parent, false)
+        val view: View = convertView ?: LayoutInflater.from(context)
+            .inflate(R.layout.row_item_alarm, parent, false)
 
         val alarmNameTextView: TextView = view.alarm_name
         alarmNameTextView.text = alarmList[position].name
 
         val alarmTimeTextView: TextView = view.alarm_time
-        alarmTimeTextView.text = "${alarmList[position].date.get(Calendar.HOUR)} : ${alarmList[position].date.get(Calendar.MINUTE)}"
+        alarmTimeTextView.text = "${alarmList[position].date.get(Calendar.HOUR)} : ${
+            alarmList[position].date.get(Calendar.MINUTE)
+        }"
 
         val switchCompat: SwitchCompat = view.alarm_switch
         switchCompat.setOnCheckedChangeListener { compoundButton: CompoundButton, isChecked: Boolean ->
             if (isChecked) {
-                println("Postiton: $position & Name: ${alarmList[position].name}")
-                this.activateAlarm(position)
+                activateAlarm(position)
             } else {
-                this.stopAlarm()
+                deactivateAlarm(alarmList[position].id)
             }
+        }
+
+        if (alarmList[position].isActive) {
+            switchCompat.isChecked = true
+            activateAlarm(position)
         }
 
         return view
     }
 
-    fun activateAlarm(position: Int) {
-        val intent = Intent(context, MyBroadcastReceiver::class.java)
-        intent.putExtra("name", alarmList[position].name)
-        intent.action = "com.wakeupbuddy.alarm"
-        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmList[position].date.timeInMillis, pendingIntent)
-        println("Alarm ${alarmList[position].name} activated")
+    fun createAlarm(name: String, hours: Int, minutes: Int) {
+        val alarmTime = Calendar.getInstance()
+        alarmTime.set(Calendar.HOUR_OF_DAY, hours)
+        alarmTime.set(Calendar.MINUTE, minutes)
+        val alarm = Alarm(name, alarmTime, true)
+        alarmList.add(alarm)
+        activateAlarm(alarmList.size - 1)
+        println("Alarm ${alarm.name} created")
     }
 
-    fun stopAlarm() {
+    fun activateAlarm(position: Int) {
+        val intent = Intent(context.applicationContext, MyBroadcastReceiver::class.java)
+        intent.putExtra("name", alarmList[position].name)
+        intent.putExtra("alarm_id", alarmList[position].id.toString())
+        intent.action = "com.wakeupbuddy.alarm"
+        val pendingIntent: PendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            alarmList[position].date.timeInMillis,
+            pendingIntent
+        )
+        println("Alarm ${alarmList[position].name} activated")
+        println("Alarm set to ${alarmList[position].date.get(Calendar.HOUR)}:${alarmList[position].date.get(Calendar.MINUTE)}")
+    }
+
+    fun deactivateAlarm(alarm_id: UUID) {
         val intent = Intent(context, MyBroadcastReceiver::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
         alarmManager.cancel(pendingIntent)
 
-        ringtone.stop()
+        if (ringtone.isPlaying) ringtone.stop()
+
+        alarmList.forEachIndexed { index, alarm ->
+            if (alarm.id == alarm_id) {
+                alarmList[index].isActive = false
+                println("Alarm ${alarmList[index].name} deactivated")
+            }
+        }
 
         println("Alarm stopped")
     }
