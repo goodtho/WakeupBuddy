@@ -27,7 +27,10 @@ class AlarmActivity : AppCompatActivity() {
             val extras = intent.extras as Bundle
             alarmManager.deactivateAlarm(UUID.fromString(extras.getString("alarm_id")))
 
-            startActivity(Intent(this, HomeActivity::class.java))
+            if (isTaskRoot) {
+                startActivity(Intent(this, HomeActivity::class.java))
+            }
+            finish()
         }
     }
 

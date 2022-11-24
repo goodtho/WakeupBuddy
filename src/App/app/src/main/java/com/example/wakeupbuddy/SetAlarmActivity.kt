@@ -30,11 +30,9 @@ class SetAlarmActivity : AppCompatActivity() {
             val wkbApp = applicationContext as WakeUpBuddyApp
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 var hours: Int = timePicker.hour
-                if (!timePicker.is24HourView) hours += 12
                 wkbApp.getMyAlarmManager().createAlarm(alarmName, hours, timePicker.minute)
             } else {
                 var hours: Int = timePicker.currentHour
-                if (!timePicker.is24HourView) hours += 12
                 wkbApp.getMyAlarmManager().createAlarm(alarmName, hours, timePicker.currentMinute)
             }
             wkbApp.getMyAlarmManager().notifyDataSetChanged()
