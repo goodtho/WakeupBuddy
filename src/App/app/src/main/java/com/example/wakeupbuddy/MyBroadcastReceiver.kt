@@ -21,7 +21,7 @@ class MyBroadcastReceiver : BroadcastReceiver() {
             val extras: Bundle = intent.extras as Bundle
             println("Alarm ${extras.get("name")} is ringing!")
 
-            // set and start vibration
+            // set and start vibration //todo implement if for vibration settings
             if (Build.VERSION.SDK_INT >= 31) {
                 val effectId: Int = VibrationEffect.Composition.PRIMITIVE_LOW_TICK
                 val vibratorManager: VibratorManager =
@@ -43,7 +43,10 @@ class MyBroadcastReceiver : BroadcastReceiver() {
 
             // set and play ringtone
             val wkbApp = context.applicationContext as WakeUpBuddyApp
-            wkbApp.getMyAlarmManager().playRingtone()
+            wkbApp.getRingtone().play()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                wkbApp.getRingtone().isLooping = true
+            }
 
             // initialize specific alarm activity
             val alarmIntent = Intent(context.applicationContext, AlarmActivity::class.java)

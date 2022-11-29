@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.wakeupbuddy.databinding.FragmentAddAlarmBinding
@@ -38,4 +39,5 @@ class MyAlarmsFragment : Fragment() {
             alarmListView.adapter = wkbApp.getMyAlarmManager()
         }
     }
+
 }

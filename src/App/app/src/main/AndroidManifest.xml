@@ -25,9 +25,11 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".SetAlarmToneActivity"
+            android:exported="false" />
+        <activity
             android:name=".AlarmActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"/>
         <activity
             android:name=".HomeActivity"
             android:exported="false">
