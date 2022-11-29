@@ -14,7 +14,7 @@ import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wakeupbuddy.databinding.ActivitySetAlarmToneBinding
 import kotlinx.android.synthetic.main.activity_set_alarm_tone.view.*
-import kotlinx.android.synthetic.main.row_item_alarm_tone.view.*
+import kotlinx.android.synthetic.main.row_item_with_button.view.*
 import kotlin.collections.ArrayList
 
 class SetAlarmToneActivity : AppCompatActivity() {
@@ -30,8 +30,6 @@ class SetAlarmToneActivity : AppCompatActivity() {
         val alarmTonesLV: ListView = binding.root.alarm_tone_list
         myATManager = MyAlarmToneManager(this@SetAlarmToneActivity)
         alarmTonesLV.adapter = myATManager
-
-        // todo check if all alarm tone choices are shown and the list is correctly usable/scrollable
 
     }
 
@@ -65,19 +63,17 @@ class SetAlarmToneActivity : AppCompatActivity() {
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             val view: View = convertView ?: LayoutInflater.from(context)
-                .inflate(R.layout.row_item_alarm_tone, parent, false)
+                .inflate(R.layout.row_item_with_button, parent, false)
 
-            val alarmToneName = view.alarm_tone_name
-            alarmToneName.text = alarmToneList[position].first
-//            val alarmToneUri = view.alarm_tone_uri
-//            alarmToneUri.text = alarmToneList[position].second
+            view.element_name.text = alarmToneList[position].first
 
-            val selectButton: ImageButton = view.select_alarm_tone_button
+            val selectButton: ImageButton = view.select_button
             selectButton.setOnClickListener {
                 val wkbApp = context.applicationContext as WakeUpBuddyApp
                 val uri = Uri.parse(alarmToneList[position].second)
                 wkbApp.setAlarmTone(uri)
                 println("New alarm tone ${alarmToneList[position].first} set")
+                notifyDataSetChanged()
                 finish()
             }
 

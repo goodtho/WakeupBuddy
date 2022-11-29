@@ -28,6 +28,9 @@
             android:name=".SetAlarmToneActivity"
             android:exported="false" />
         <activity
+            android:name=".SetTimezoneActivity"
+            android:exported="false" />
+        <activity
             android:name=".AlarmActivity"
             android:exported="false"/>
         <activity

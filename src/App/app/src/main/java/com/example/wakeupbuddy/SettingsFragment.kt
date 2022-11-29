@@ -32,6 +32,11 @@ class SettingsFragment : Fragment() {
             println("Vibration set to $isChecked")
         }
 
+        binding.selectTimezoneName.text = wkbApp.getTimezone().id
+        binding.selectTimezoneButton.setOnClickListener {
+            val intent = Intent(this@SettingsFragment.requireContext(), SetTimezoneActivity::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 

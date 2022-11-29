@@ -24,9 +24,6 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         //todo get all alarms of the user from the database
 
         alarmList.add(Alarm("Alarm 1", Calendar.getInstance(), false))
-//        val calendar = Calendar.getInstance()
-//        calendar.add(Calendar.MINUTE, 10)
-//        alarmList.add(Alarm("Alarm 2", calendar, true))
 
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -81,11 +78,17 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
     fun createAlarm(name: String, hours: Int, minutes: Int) {
         val alarmTime = Calendar.getInstance()
+
+        val wkbApp = context.applicationContext as WakeUpBuddyApp
+        alarmTime.timeZone = wkbApp.getTimezone()
+
         alarmTime.set(Calendar.HOUR_OF_DAY, hours)
         alarmTime.set(Calendar.MINUTE, minutes)
+
         val alarm = Alarm(name, alarmTime, true)
         alarmList.add(alarm)
         activateAlarm(alarmList.size - 1)
+
         println("Alarm ${alarm.name} for ${alarm.date.get(Calendar.HOUR)}:${alarm.date.get(Calendar.MINUTE)} created")
     }
 

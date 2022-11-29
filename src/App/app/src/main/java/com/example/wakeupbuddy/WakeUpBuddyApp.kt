@@ -18,9 +18,18 @@ class WakeUpBuddyApp : Application() {
         //todo get user settings from the db and initialize global (wkbApp) settings object
 
         val prefs = getSharedPreferences("UserInfo", 0)
-        val uri = Uri.parse(prefs.getString("AlarmToneUri", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString()))
+        val uri = Uri.parse(
+            prefs.getString(
+                "AlarmToneUri",
+                RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString()
+            )
+        )
         val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
-        mySettings = Settings(prefs.getBoolean("VibrationActivated", true), TimeZone.getDefault(), ringtone)
+        mySettings = Settings(
+            prefs.getBoolean("VibrationActivated", true),
+            TimeZone.getTimeZone(prefs.getString("TimezoneId", TimeZone.getDefault().id)),
+            ringtone
+        )
 
         myAMInitalized = true
         myAM = MyAlarmManager(context)
@@ -30,7 +39,7 @@ class WakeUpBuddyApp : Application() {
 
     fun myAlarmManagerIsInitialized(): Boolean = myAMInitalized
 
-    fun getAlarmTone() : Ringtone {
+    fun getAlarmTone(): Ringtone {
         return mySettings.ringtone
     }
 
@@ -49,6 +58,16 @@ class WakeUpBuddyApp : Application() {
         val settings = getSharedPreferences("UserInfo", 0)
         val editor = settings.edit()
         editor.putBoolean("VibrationActivated", state)
+        editor.apply()
+    }
+
+    fun getTimezone(): TimeZone = mySettings.timezone
+
+    fun setTimezone(region: String) {
+        mySettings.timezone = TimeZone.getTimeZone(region)
+        val settings = getSharedPreferences("UserInfo", 0)
+        val editor = settings.edit()
+        editor.putString("TimezoneId", region)
         editor.apply()
     }
 
