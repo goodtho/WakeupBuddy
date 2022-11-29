@@ -58,7 +58,6 @@ class SetTimezoneActivity : AppCompatActivity() {
                 val wkbApp = context.applicationContext as WakeUpBuddyApp
                 wkbApp.setTimezone(timezoneList[position])
                 println("New timezone set to ${timezoneList[position]}")
-                notifyDataSetChanged()
                 finish()
             }
 

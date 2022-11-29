@@ -73,7 +73,6 @@ class SetAlarmToneActivity : AppCompatActivity() {
                 val uri = Uri.parse(alarmToneList[position].second)
                 wkbApp.setAlarmTone(uri)
                 println("New alarm tone ${alarmToneList[position].first} set")
-                notifyDataSetChanged()
                 finish()
             }
 
