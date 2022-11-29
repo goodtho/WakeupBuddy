@@ -21,31 +21,32 @@ class MyBroadcastReceiver : BroadcastReceiver() {
             val extras: Bundle = intent.extras as Bundle
             println("Alarm ${extras.get("name")} is ringing!")
 
-            // set and start vibration //todo implement if for vibration settings
-            if (Build.VERSION.SDK_INT >= 31) {
-                val effectId: Int = VibrationEffect.Composition.PRIMITIVE_LOW_TICK
-                val vibratorManager: VibratorManager =
-                    context?.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-                if (vibratorManager.defaultVibrator.areAllPrimitivesSupported(effectId)) {
-                    vibratorManager.vibrate(
-                        CombinedVibration.createParallel(
-                            VibrationEffect.startComposition()
-                                .addPrimitive(effectId)
-                                .compose()
+            val wkbApp = context?.applicationContext as WakeUpBuddyApp
+            if (wkbApp.vibrationActivated()) { // set and start vibration
+                if (Build.VERSION.SDK_INT >= 31) {
+                    val effectId: Int = VibrationEffect.Composition.PRIMITIVE_LOW_TICK
+                    val vibratorManager: VibratorManager =
+                        context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                    if (vibratorManager.defaultVibrator.areAllPrimitivesSupported(effectId)) {
+                        vibratorManager.vibrate(
+                            CombinedVibration.createParallel(
+                                VibrationEffect.startComposition()
+                                    .addPrimitive(effectId)
+                                    .compose()
+                            )
                         )
-                    )
+                    }
+                } else {
+                    //deprecated in API 26
+                    val vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+                    vibrator.vibrate(500)
                 }
-            } else {
-                //deprecated in API 26
-                val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vibrator.vibrate(500)
             }
 
             // set and play ringtone
-            val wkbApp = context.applicationContext as WakeUpBuddyApp
-            wkbApp.getRingtone().play()
+            wkbApp.getAlarmTone().play()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                wkbApp.getRingtone().isLooping = true
+                wkbApp.getAlarmTone().isLooping = true
             }
 
             // initialize specific alarm activity

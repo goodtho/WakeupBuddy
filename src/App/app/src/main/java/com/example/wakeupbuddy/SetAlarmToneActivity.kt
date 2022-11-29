@@ -1,12 +1,10 @@
 package com.example.wakeupbuddy
 
-import java.util.*
 import android.content.Context
 import android.database.Cursor
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +31,7 @@ class SetAlarmToneActivity : AppCompatActivity() {
         myATManager = MyAlarmToneManager(this@SetAlarmToneActivity)
         alarmTonesLV.adapter = myATManager
 
-        //todo create adapter for listview and present all selectable alarmtones
-        //todo set onclicklistener: if an alarmtone was selected, adjust global settings object
-        //todo (create global settings object which is initialized when the app is started)
+        // todo check if all alarm tone choices are shown and the list is correctly usable/scrollable
 
     }
 
@@ -80,7 +76,7 @@ class SetAlarmToneActivity : AppCompatActivity() {
             selectButton.setOnClickListener {
                 val wkbApp = context.applicationContext as WakeUpBuddyApp
                 val uri = Uri.parse(alarmToneList[position].second)
-                wkbApp.setRingtone(uri)
+                wkbApp.setAlarmTone(uri)
                 println("New alarm tone ${alarmToneList[position].first} set")
                 finish()
             }

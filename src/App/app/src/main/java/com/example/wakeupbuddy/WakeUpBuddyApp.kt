@@ -20,7 +20,7 @@ class WakeUpBuddyApp : Application() {
         val prefs = getSharedPreferences("UserInfo", 0)
         val uri = Uri.parse(prefs.getString("AlarmToneUri", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM).toString()))
         val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
-        mySettings = Settings(prefs.getBoolean("Vibration", true), TimeZone.getDefault(), ringtone)
+        mySettings = Settings(prefs.getBoolean("VibrationActivated", true), TimeZone.getDefault(), ringtone)
 
         myAMInitalized = true
         myAM = MyAlarmManager(context)
@@ -30,15 +30,25 @@ class WakeUpBuddyApp : Application() {
 
     fun myAlarmManagerIsInitialized(): Boolean = myAMInitalized
 
-    fun getRingtone() : Ringtone {
+    fun getAlarmTone() : Ringtone {
         return mySettings.ringtone
     }
 
-    fun setRingtone(uri: Uri) {
+    fun setAlarmTone(uri: Uri) {
         mySettings.ringtone = RingtoneManager.getRingtone(applicationContext, uri)
         val settings = getSharedPreferences("UserInfo", 0)
         val editor = settings.edit()
         editor.putString("AlarmToneUri", uri.toString())
+        editor.apply()
+    }
+
+    fun vibrationActivated(): Boolean = mySettings.vibration
+
+    fun setVibration(state: Boolean) {
+        mySettings.vibration = state
+        val settings = getSharedPreferences("UserInfo", 0)
+        val editor = settings.edit()
+        editor.putBoolean("VibrationActivated", state)
         editor.apply()
     }
 

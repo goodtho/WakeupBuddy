@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.media.Ringtone
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -122,7 +121,7 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         alarmManager.cancel(pendingIntent)
 
         val wkbApp = context.applicationContext as WakeUpBuddyApp
-        if (wkbApp.getRingtone().isPlaying) wkbApp.getRingtone().stop()
+        if (wkbApp.getAlarmTone().isPlaying) wkbApp.getAlarmTone().stop()
 
         alarmList.forEachIndexed { index, alarm ->
             if (alarm.id.equals(alarm_id)) {
