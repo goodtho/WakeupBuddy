@@ -5,13 +5,14 @@ import android.content.Context
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
+import com.example.wakeupbuddy.models.SettingsModel
 import java.util.*
 
 
 class WakeUpBuddyApp : Application() {
     private var myAMInitalized: Boolean = false
     private lateinit var myAM: MyAlarmManager
-    private lateinit var mySettings: Settings
+    private lateinit var mySettings: SettingsModel
 
     fun initializeMyAlarmManager(context: Context) {
 
@@ -25,7 +26,7 @@ class WakeUpBuddyApp : Application() {
             )
         )
         val ringtone = RingtoneManager.getRingtone(applicationContext, uri)
-        mySettings = Settings(
+        mySettings = SettingsModel(
             prefs.getBoolean("VibrationActivated", true),
             TimeZone.getTimeZone(prefs.getString("TimezoneId", TimeZone.getDefault().id)),
             ringtone

@@ -1,4 +1,4 @@
-package com.example.wakeupbuddy
+package com.example.wakeupbuddy.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

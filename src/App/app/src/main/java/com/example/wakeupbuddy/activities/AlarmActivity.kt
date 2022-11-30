@@ -1,12 +1,11 @@
-package com.example.wakeupbuddy
+package com.example.wakeupbuddy.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wakeupbuddy.WakeUpBuddyApp
 import com.example.wakeupbuddy.databinding.ActivityAlarmBinding
-import kotlinx.android.synthetic.main.row_item_alarm.view.*
 import java.util.*
 
 class AlarmActivity : AppCompatActivity() {

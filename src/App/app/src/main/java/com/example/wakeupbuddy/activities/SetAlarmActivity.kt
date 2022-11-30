@@ -1,4 +1,4 @@
-package com.example.wakeupbuddy
+package com.example.wakeupbuddy.activities
 
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TimePicker
+import com.example.wakeupbuddy.R
+import com.example.wakeupbuddy.WakeUpBuddyApp
 import com.example.wakeupbuddy.databinding.ActivitySetAlarmTimeBinding
 import kotlinx.android.synthetic.main.activity_set_alarm_time.view.*
 

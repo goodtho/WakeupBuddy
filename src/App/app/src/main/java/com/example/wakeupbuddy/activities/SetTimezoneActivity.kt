@@ -1,4 +1,4 @@
-package com.example.wakeupbuddy
+package com.example.wakeupbuddy.activities
 
 import android.content.Context
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wakeupbuddy.R
+import com.example.wakeupbuddy.WakeUpBuddyApp
 import com.example.wakeupbuddy.databinding.ActivitySetTimezoneBinding
 import kotlinx.android.synthetic.main.activity_set_timezone.view.*
 import kotlinx.android.synthetic.main.row_item_with_button.view.*

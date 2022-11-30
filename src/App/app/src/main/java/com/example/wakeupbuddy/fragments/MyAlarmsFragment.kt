@@ -1,13 +1,15 @@
-package com.example.wakeupbuddy
+package com.example.wakeupbuddy.fragments
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import com.example.wakeupbuddy.WakeUpBuddyApp
+import com.example.wakeupbuddy.activities.LoginActivity
+import com.example.wakeupbuddy.activities.SetAlarmActivity
 import com.example.wakeupbuddy.databinding.FragmentAddAlarmBinding
 import kotlinx.android.synthetic.main.fragment_add_alarm.view.*
 
