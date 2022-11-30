@@ -12,23 +12,28 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import kotlinx.android.synthetic.main.row_item_alarm.view.*
+import java.com.example.wakeupbuddy.models.AlarmModel
 import java.util.*
 
 
 class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
-    private val alarmList: ArrayList<Alarm> = ArrayList()
+    private val alarmList: ArrayList<AlarmModel> = ArrayList()
     private var alarmManager: AlarmManager
+    private val wkbApp: WakeUpBuddyApp = context.applicationContext as WakeUpBuddyApp
 
     init {
         //todo get all alarms of the user from the database
 
-        alarmList.add(Alarm("Alarm 1", Calendar.getInstance(), false))
+        val calendar = Calendar.getInstance()
+        calendar.timeZone = wkbApp.getTimezone()
+        val time = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
+        alarmList.add(AlarmModel(name="Alarm 1", time=time, active=0))
 
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         alarmList.forEachIndexed { index, alarm ->
-            if (alarm.isActive) {
+            if (alarm.active == 1) {
                 activateAlarm(index)
             }
         }
@@ -58,20 +63,18 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         alarmNameTextView.text = alarmList[position].name
 
         val alarmTimeTextView: TextView = view.alarm_time
-        alarmTimeTextView.text = "${alarmList[position].date.get(Calendar.HOUR)} : ${
-            alarmList[position].date.get(Calendar.MINUTE)
-        }"
+        alarmTimeTextView.text = alarmList[position].time
 
         val switchCompat: SwitchCompat = view.alarm_switch
         switchCompat.setOnCheckedChangeListener { compoundButton: CompoundButton, isChecked: Boolean ->
-            if (isChecked && !alarmList[position].isActive) {
+            if (isChecked && (alarmList[position].active != 1)) {
                 activateAlarm(position)
-            } else if (!isChecked && alarmList[position].isActive) {
-                deactivateAlarm(alarmList[position].id)
+            } else if (!isChecked && (alarmList[position].active == 1)) {
+                deactivateAlarm(UUID.fromString(alarmList[position].id))
             }
         }
 
-        switchCompat.isChecked = alarmList[position].isActive
+        switchCompat.isChecked = (alarmList[position].active == 1)
 
         return view
     }
@@ -79,20 +82,18 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
     fun createAlarm(name: String, hours: Int, minutes: Int) {
         val alarmTime = Calendar.getInstance()
 
-        val wkbApp = context.applicationContext as WakeUpBuddyApp
-        alarmTime.timeZone = wkbApp.getTimezone()
-
         alarmTime.set(Calendar.HOUR_OF_DAY, hours)
         alarmTime.set(Calendar.MINUTE, minutes)
+        val time = "$hours:$minutes"
 
-        val alarm = Alarm(name, alarmTime, true)
+        val alarm = AlarmModel(name=name, time=time, active=1)
         alarmList.add(alarm)
         activateAlarm(alarmList.size - 1)
 
-        println("Alarm ${alarm.name} for ${alarm.date.get(Calendar.HOUR)}:${alarm.date.get(Calendar.MINUTE)} created")
+        println("Alarm ${alarm.name} for $time created")
     }
 
-    fun activateAlarm(position: Int) {
+    private fun activateAlarm(position: Int) {
         val intent = Intent(context.applicationContext, MyBroadcastReceiver::class.java)
         intent.putExtra("name", alarmList[position].name)
         intent.putExtra("alarm_id", alarmList[position].id.toString())
@@ -101,20 +102,24 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
         val pendingIntent: PendingIntent =
             PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        val timeData = alarmList[position].time.split(":")
+        val time = Calendar.getInstance()
+        time.timeZone = wkbApp.getTimezone()
+        time.set(Calendar.HOUR_OF_DAY, timeData[0].toInt()) //set hours
+        time.set(Calendar.MINUTE, timeData[1].toInt()) //set minutes
+
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
-            alarmList[position].date.timeInMillis,
+            time.timeInMillis,
             pendingIntent
         )
 
         println("Alarm ${alarmList[position].name} activated")
         println(
-            "Alarm set to ${alarmList[position].date.get(Calendar.HOUR)}:${
-                alarmList[position].date.get(
-                    Calendar.MINUTE
-                )
-            }"
+            "Alarm set to ${alarmList[position].time}"
         )
+        println("Time in Millis: ${time.timeInMillis}")
     }
 
     fun deactivateAlarm(alarm_id: UUID) {
@@ -123,12 +128,11 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
         alarmManager.cancel(pendingIntent)
 
-        val wkbApp = context.applicationContext as WakeUpBuddyApp
         if (wkbApp.getAlarmTone().isPlaying) wkbApp.getAlarmTone().stop()
 
         alarmList.forEachIndexed { index, alarm ->
             if (alarm.id.equals(alarm_id)) {
-                alarmList[index].isActive = false
+                alarmList[index].active = 0
                 println("Alarm ${alarmList[index].name} deactivated")
             }
         }
