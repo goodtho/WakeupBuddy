@@ -9,4 +9,4 @@ src/App/.externalNativeBuild
 src/App/.cxx
 src/App/local.properties
 src/App/.idea
-src/App/app/build
+src/App/app/src/debug
