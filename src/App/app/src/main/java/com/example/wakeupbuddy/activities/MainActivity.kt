@@ -1,7 +1,6 @@
-package com.example.wakeupbuddy
+package com.example.wakeupbuddy.activities
 
 import android.content.Intent
-import android.os.Binder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.wakeupbuddy.databinding.ActivityMainBinding
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
         } // 3
         binding.btnSignup.setOnClickListener {
-            startActivity(Intent(this,SignupActivity::class.java))
+            startActivity(Intent(this, SignupActivity::class.java))
         } //4
 
     }
