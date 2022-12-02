@@ -70,11 +70,12 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
             if (isChecked && (alarmList[position].active != 1)) {
                 activateAlarm(position)
             } else if (!isChecked && (alarmList[position].active == 1)) {
-                deactivateAlarm(UUID.fromString(alarmList[position].id))
+                deactivateAlarm(alarmList[position].id)
             }
         }
 
-        switchCompat.isChecked = (alarmList[position].active == 1)
+        var test = (alarmList[position].active == 1)
+        switchCompat.isChecked = test
 
         return view
     }
@@ -109,6 +110,11 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         time.set(Calendar.HOUR_OF_DAY, timeData[0].toInt()) //set hours
         time.set(Calendar.MINUTE, timeData[1].toInt()) //set minutes
 
+        if (time.timeInMillis < Calendar.getInstance().timeInMillis) {
+            time.add(Calendar.DAY_OF_YEAR, 1)
+            println("Alarm scheduled for tomorrow")
+        }
+
         alarmManager.setExact(
             AlarmManager.RTC_WAKEUP,
             time.timeInMillis,
@@ -122,7 +128,7 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         println("Time in Millis: ${time.timeInMillis}")
     }
 
-    fun deactivateAlarm(alarm_id: UUID) {
+    fun deactivateAlarm(alarm_id: String) {
         val intent = Intent(context, MyBroadcastReceiver::class.java)
         intent.action = "com.wakeupbuddy.alarm"
         val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
@@ -131,7 +137,7 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         if (wkbApp.getAlarmTone().isPlaying) wkbApp.getAlarmTone().stop()
 
         alarmList.forEachIndexed { index, alarm ->
-            if (alarm.id.equals(alarm_id)) {
+            if (alarm.id == alarm_id) {
                 alarmList[index].active = 0
                 println("Alarm ${alarmList[index].name} deactivated")
             }

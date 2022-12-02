@@ -39,6 +39,8 @@ class MyAlarmsFragment : Fragment() {
             val alarmListView: ListView = view.alarm_list
             wkbApp.initializeMyAlarmManager(this@MyAlarmsFragment.requireContext())
             alarmListView.adapter = wkbApp.getMyAlarmManager()
+        } else {
+            view.alarm_list.adapter = wkbApp.getMyAlarmManager()
         }
     }
 
