@@ -23,7 +23,7 @@ class AlarmActivity : AppCompatActivity() {
             val alarmManager = wkbApp.getMyAlarmManager()
 
             val extras = intent.extras as Bundle
-            alarmManager.deactivateAlarm(UUID.fromString(extras.getString("alarm_id")))
+            extras.getString("alarm_id")?.let { alarmManager.deactivateAlarm(it) }
 
             if (isTaskRoot) {
                 startActivity(Intent(this, HomeActivity::class.java))

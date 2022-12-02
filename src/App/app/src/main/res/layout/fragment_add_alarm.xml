@@ -13,12 +13,12 @@
         style="@style/ButtonBlack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="@string/btn_logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintEnd_toStartOf="@+id/home_greeting"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_analog_clock" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/home_greeting"
@@ -34,10 +34,11 @@
 
     <AnalogClock
         android:id="@+id/home_analog_clock"
-        android:layout_width="199dp"
-        android:layout_height="189dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="174dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_greeting" />
 
@@ -45,13 +46,14 @@
         android:id="@+id/home_alarm_list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="4dp"
         android:text="@string/home_alarm_list_title"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_logout"
-        android:textColor="@color/black" />
+        app:layout_constraintTop_toBottomOf="@+id/home_analog_clock" />
 
     <ImageButton
         android:id="@+id/button"
@@ -70,14 +72,15 @@
     <ListView
         android:id="@+id/alarm_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="325sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/home_alarm_list_title"
-        app:layout_constraintVertical_bias="0.506"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
+        app:layout_constraintVertical_bias="0.735" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
