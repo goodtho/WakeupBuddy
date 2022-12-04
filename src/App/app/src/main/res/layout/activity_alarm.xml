@@ -6,16 +6,56 @@
     android:layout_height="match_parent"
     tools:context=".activities.AlarmActivity">
 
-    <Button
-        android:id="@+id/b_deactivate_alarm"
+    <TextView
+        android:id="@+id/alarm_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="100dp"
+        android:text="06:20"
+        android:textColor="@color/black"
+        android:textSize="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alarm_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Monday, 32. December"
+        android:textColor="@color/black"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_time" />
+
+    <Button
+        android:id="@+id/snooze_alarm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="20dp"
         android:text="Snooze Alarm"
-        android:onClick="stopAlarmButton"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deactivate_alarm_button"
+        app:layout_constraintVertical_bias="0.319" />
+
+    <Button
+        android:id="@+id/deactivate_alarm_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:padding="20dp"
+        android:text="Stop Alarm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_date" />
+
+    <!--todo weather, temperature, news, own picture, own message -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
