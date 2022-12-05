@@ -125,7 +125,6 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         println(
             "Alarm set to ${alarmList[position].time}"
         )
-        println("Time in Millis: ${time.timeInMillis}")
     }
 
     fun deactivateAlarm(alarm_id: String) {
@@ -136,15 +135,62 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
         if (wkbApp.getAlarmTone().isPlaying) wkbApp.getAlarmTone().stop()
 
+        var position = -1
         alarmList.forEachIndexed { index, alarm ->
             if (alarm.id == alarm_id) {
                 alarmList[index].active = 0
                 println("Alarm ${alarmList[index].name} deactivated")
+                position = index
             }
         }
         notifyDataSetChanged()
 
-        println("Alarm stopped")
+        println("Alarm ${alarmList[position].name} stopped")
+        println(
+            "Alarm set to ${alarmList[position].time}"
+        )
+    }
+
+    fun snoozeAlarm(alarm_id: String) {
+        val intent = Intent(context.applicationContext, MyBroadcastReceiver::class.java) //or just context
+        intent.action = "com.wakeupbuddy.alarm"
+        val cancelAlarmPI = PendingIntent.getBroadcast(context, 0, intent, 0)
+        alarmManager.cancel(cancelAlarmPI)
+
+        if (wkbApp.getAlarmTone().isPlaying) wkbApp.getAlarmTone().stop()
+
+        var position = -1
+        alarmList.forEachIndexed { index, alarm ->
+            if (alarm_id == alarmList[index].id) position = index
+        }
+
+//        val intent = Intent(context.applicationContext, MyBroadcastReceiver::class.java)
+        intent.putExtra("name", alarmList[position].name)
+        intent.putExtra("alarm_id", alarmList[position].id.toString())
+//        intent.action = "com.wakeupbuddy.alarm"
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+
+        val createAlarmPI = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+//        val timeData = alarmList[position].time.split(":")
+//        val time = Calendar.getInstance()
+//        time.timeZone = wkbApp.getTimezone()
+//        time.set(Calendar.HOUR_OF_DAY, timeData[0].toInt()) //set hours
+//        time.set(Calendar.MINUTE, timeData[1].toInt()) //set minutes
+
+        val time = Calendar.getInstance()
+        time.add(Calendar.MINUTE, 3)
+
+        alarmManager.setExact(
+            AlarmManager.RTC_WAKEUP,
+            time.timeInMillis,
+            createAlarmPI
+        )
+
+        println("Alarm ${alarmList[position].name} snoozed")
+        println(
+            "Alarm set to ${time.get(Calendar.HOUR_OF_DAY)}:${time.get(Calendar.MINUTE)}"
+        )
     }
 
 }
