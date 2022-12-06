@@ -1,60 +1,97 @@
 package com.example.wakeupbuddy.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.wakeupbuddy.databinding.FragmentFriendsBinding
+import android.widget.BaseAdapter
+import android.widget.ImageButton
+import androidx.fragment.app.Fragment
+import com.example.wakeupbuddy.R
+import com.example.wakeupbuddy.WakeUpBuddyApp
+import com.example.wakeupbuddy.databinding.FragmentMyFriendsBinding
+import com.example.wakeupbuddy.activities.AddFriendsActivity
+import kotlinx.android.synthetic.main.row_item_friends.view.*
+import java.com.example.wakeupbuddy.models.UserModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MyFriendsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MyFriendsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentMyFriendsBinding
+    private lateinit var myFriendsManager: MyFriendsManager
+    private lateinit var wkbApp: WakeUpBuddyApp
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return FragmentFriendsBinding.inflate(layoutInflater).root
+        super.onCreateView(inflater, container, savedInstanceState)
+        binding = FragmentMyFriendsBinding.inflate(layoutInflater)
+        binding.addFriendFab.setOnClickListener {
+            val intent =
+                Intent(this@MyFriendsFragment.requireContext(), AddFriendsActivity::class.java)
+            startActivity(intent)
+        }
+        wkbApp = context?.applicationContext as WakeUpBuddyApp
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment friends.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyFriendsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        myFriendsManager = MyFriendsManager(this@MyFriendsFragment.requireContext())
+        binding.myFriendsList.adapter = myFriendsManager
+    }
+
+    override fun onResume() {
+        super.onResume()
+        myFriendsManager.updateFriendList()
+        myFriendsManager.notifyDataSetChanged()
+    }
+
+    inner class MyFriendsManager(private val context: Context) : BaseAdapter() {
+
+        private var friendList: ArrayList<UserModel>
+
+        init {
+            friendList = wkbApp.getFriendsOfCurrentUser()
+        }
+
+        override fun getCount(): Int {
+            return friendList.size
+        }
+
+        override fun getItem(position: Int): Any {
+            return position
+        }
+
+        override fun getItemId(position: Int): Long {
+            return position.toLong()
+        }
+
+        override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+            val view: View = convertView ?: LayoutInflater.from(context)
+                .inflate(R.layout.row_item_friends, parent, false)
+
+            view.name_text.text = friendList[position].name
+            view.username_text.text = friendList[position].username
+            view.add_friend_button.setImageResource(R.drawable.ic_baseline_person_remove_24)
+            view.add_friend_button.setOnClickListener {
+                val friendUsername = view.username_text.text.toString()
+                val wkbApp = context.applicationContext as WakeUpBuddyApp
+                val friend = wkbApp.getUser(friendUsername)
+                friendList.remove(friend)
+                wkbApp.deleteFriendConnection(friend!!.id)
+                this.notifyDataSetChanged()
             }
+
+            return view
+        }
+
+        fun updateFriendList() {
+            friendList = wkbApp.getFriendsOfCurrentUser()
+        }
+
     }
 }

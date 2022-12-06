@@ -12,12 +12,12 @@ import java.com.example.wakeupbuddy.models.UserModel
 
 class SignupActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySignupBinding //1
+    private lateinit var binding: ActivitySignupBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignupBinding.inflate(layoutInflater) //2
-        setContentView(binding.root)   //3
+        binding = ActivitySignupBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         binding.btnSignup.setOnClickListener {
 
@@ -50,7 +50,7 @@ class SignupActivity : AppCompatActivity() {
             }
 
             if (signUpCorrect) {
-                val newUser = UserModel(username=username, password=password, email=email)
+                val newUser = UserModel(username=username, password=password, email=email, name=name)
                 wkbApp.createUser(newUser)
                 wkbApp.setCurrentUser(newUser)
 
@@ -58,11 +58,11 @@ class SignupActivity : AppCompatActivity() {
                 finish()
             }
 
-        } //4
+        }
         binding.haveAcc.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
-        } //5
+        }
     }
 
 }

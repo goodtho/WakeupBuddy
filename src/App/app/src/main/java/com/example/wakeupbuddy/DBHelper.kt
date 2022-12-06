@@ -22,7 +22,7 @@ abstract class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?
         contentValues.put(USER_ID, user.id)
         contentValues.put(USER_USERNAME, user.username)
         contentValues.put(USER_PASSWORD, hashPassword(user.password))
-        contentValues.put(USER_BIRTHDAY, user.birthday)
+        contentValues.put(USER_NAME, user.name)
         contentValues.put(USER_EMAIL, user.email)
 
         val success = db.insert(USER_TABLE, null, contentValues)
@@ -36,7 +36,7 @@ abstract class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?
         val contentValues = ContentValues()
         contentValues.put(USER_USERNAME, user.username)
         contentValues.put(USER_PASSWORD, hashPassword(user.password))
-        contentValues.put(USER_BIRTHDAY, user.birthday)
+        contentValues.put(USER_NAME, user.name)
         contentValues.put(USER_EMAIL, user.email)
 
         val success = db.update(USER_TABLE, contentValues, "id="+user.id, null)
@@ -94,7 +94,7 @@ abstract class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?
         user.password = cursor.getString(cursor.getColumnIndex(USER_PASSWORD))
         user.username = cursor.getString(cursor.getColumnIndex(USER_USERNAME))
         user.email = cursor.getString(cursor.getColumnIndex(USER_EMAIL))
-        user.birthday = cursor.getString(cursor.getColumnIndex(USER_BIRTHDAY))
+        user.name = cursor.getString(cursor.getColumnIndex(USER_NAME))
 
         return user
     }
@@ -163,7 +163,7 @@ abstract class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?
         const val USER_ID = "id"
         const val USER_USERNAME = "username"
         const val USER_PASSWORD = "pasasword"
-        const val USER_BIRTHDAY = "birthday"
+        const val USER_NAME = "name"
         const val USER_EMAIL = "email"
 
         const val ALARM_TABLE = "alarm"

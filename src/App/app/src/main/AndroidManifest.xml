@@ -32,7 +32,10 @@
             android:exported="false" />
         <activity
             android:name=".activities.AlarmActivity"
-            android:exported="false"/>
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddFriendsActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.HomeActivity"
             android:exported="false">
