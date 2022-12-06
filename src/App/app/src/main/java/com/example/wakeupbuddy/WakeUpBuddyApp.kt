@@ -6,19 +6,24 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import com.example.wakeupbuddy.models.SettingsModel
+import java.com.example.wakeupbuddy.models.UserModel
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class WakeUpBuddyApp : Application() {
+
     private var myAMInitalized: Boolean = false
     private lateinit var myAM: MyAlarmManager
     private lateinit var mySettings: SettingsModel
+    private var userList: ArrayList<UserModel> = ArrayList()
+    private var currentUser: UserModel? = null
 
     fun initializeMyAlarmManager(context: Context) {
 
         //todo get user settings from the db and initialize global (wkbApp) settings object
 
-        val prefs = getSharedPreferences("UserInfo", 0)
+        val prefs = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
         val uri = Uri.parse(
             prefs.getString(
                 "AlarmToneUri",
@@ -46,7 +51,7 @@ class WakeUpBuddyApp : Application() {
 
     fun setAlarmTone(uri: Uri) {
         mySettings.ringtone = RingtoneManager.getRingtone(applicationContext, uri)
-        val settings = getSharedPreferences("UserInfo", 0)
+        val settings = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
         val editor = settings.edit()
         editor.putString("AlarmToneUri", uri.toString())
         editor.apply()
@@ -56,7 +61,7 @@ class WakeUpBuddyApp : Application() {
 
     fun setVibration(state: Boolean) {
         mySettings.vibration = state
-        val settings = getSharedPreferences("UserInfo", 0)
+        val settings = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
         val editor = settings.edit()
         editor.putBoolean("VibrationActivated", state)
         editor.apply()
@@ -66,10 +71,86 @@ class WakeUpBuddyApp : Application() {
 
     fun setTimezone(region: String) {
         mySettings.timezone = TimeZone.getTimeZone(region)
-        val settings = getSharedPreferences("UserInfo", 0)
+        val settings = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
         val editor = settings.edit()
         editor.putString("TimezoneId", region)
         editor.apply()
+    }
+
+    private fun loadUserList() {
+        val settings = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
+        val usersAsStrings: Set<String>? = settings.getStringSet("Users", null)
+        userList = ArrayList<UserModel>()
+        usersAsStrings?.forEach { user: String ->
+            val userData = user.split(SPLIT_SYMBOL)
+            val id = userData[0]
+            val username = userData[1]
+            val password = userData[2]
+            val email = userData[3]
+            val birthday = userData[4]
+            userList.add(UserModel(id, username, password, birthday, email))
+        }
+    }
+
+    fun getUser(userID: String = ""): UserModel? {
+        if (userList.isEmpty()) {
+            loadUserList()
+        }
+
+        if (userID != "") {
+            userList.forEach { user: UserModel ->
+                if (user.username == userID || user.email == userID) {
+                    return user
+                }
+            }
+        }
+        return null
+    }
+
+    fun userExists(userID: String = ""): Boolean {
+        if (userList.isEmpty()) {
+            loadUserList()
+        }
+
+        if (userID != "") {
+            userList.forEach { user: UserModel ->
+                if (user.username == userID || user.email == userID || user.id == userID) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    fun createUser(user: UserModel) {
+        if (!userExists(user.email) && !userExists(user.username)) {
+            userList.add(user)
+            persistUserList()
+        }
+    }
+
+    private fun persistUserList() {
+        val settings = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
+        val editor = settings.edit()
+        val usersAsSet: MutableSet<String> = mutableSetOf()
+        userList.forEach { user: UserModel ->
+            val userAsString = "${user.id}$SPLIT_SYMBOL${user.username}$SPLIT_SYMBOL" +
+                "${user.password}$SPLIT_SYMBOL${user.email}$SPLIT_SYMBOL${user.birthday}"
+            usersAsSet.add(userAsString)
+        }
+        editor.putStringSet("Users", usersAsSet)
+        editor.apply()
+    }
+
+    fun setCurrentUser(user: UserModel?) {
+        currentUser = user
+    }
+
+    fun getCurrentUser(): UserModel? = currentUser
+
+    companion object {
+        const val SHARED_PREFERENCES_NAME = "UserInfo"
+        private const val SPLIT_SYMBOL = "/-"
     }
 
 }

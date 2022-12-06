@@ -20,21 +20,21 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_name"
+        style="@style/TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        style="@style/TextInputLayout"
+        android:layout_marginTop="15dp"
         android:hint="@string/hint_name"
-        app:layout_constraintTop_toBottomOf="@id/signup_title"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_error_message"
         app:startIconDrawable="@drawable/ic_account">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_name"
+            style="@style/TextInputEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextInputEditText"/>
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -139,7 +139,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/have_acc" />
 
-
+    <TextView
+        android:id="@+id/signup_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="96dp"
+        android:text="Username already exists!"
+        android:textColor="#f00"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_title"
+        android:visibility="invisible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
