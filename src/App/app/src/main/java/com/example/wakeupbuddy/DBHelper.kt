@@ -99,8 +99,8 @@ abstract class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?
         return user
     }
 
-    private fun mockGroupList(cursor : Cursor):GroupListModel{
-        val groupList = GroupListModel()
+    private fun mockGroupList(cursor : Cursor):GroupModel{
+        val groupList = GroupModel()
         groupList.id = cursor.getString(cursor.getColumnIndex(GROUP_LIST_ID))
         groupList.groupAdmin = cursor.getString(cursor.getColumnIndex(GROUP_LIST_GROUPADMIN))
         groupList.name = cursor.getString(cursor.getColumnIndex(GROUP_LIST_NAME))
@@ -130,11 +130,10 @@ abstract class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?
     private fun mockAlarm(cursor : Cursor):AlarmModel{
         val alarm = AlarmModel()
         alarm.id = cursor.getString(cursor.getColumnIndex(ALARM_ID))
-        alarm.alarmUser = cursor.getString(cursor.getColumnIndex(ALARM_USER))
-        alarm.alarmGroup = cursor.getString(cursor.getColumnIndex(ALARM_GROUP))
         alarm.time = cursor.getString(cursor.getColumnIndex(ALARM_TIME))
         alarm.active = cursor.getInt(cursor.getColumnIndex(ALARM_ACTIVE))
         alarm.name = cursor.getString(cursor.getColumnIndex(ALARM_NAME))
+        alarm.groupID = cursor.getString(cursor.getColumnIndex(GROUP_ID))
 
         return alarm
     }
@@ -168,8 +167,7 @@ abstract class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?
 
         const val ALARM_TABLE = "alarm"
         const val ALARM_ID = "id"
-        const val ALARM_USER = "alarm_user"
-        const val ALARM_GROUP = "alarm_group"
+        const val GROUP_ID = "group_id"
         const val ALARM_TIME = "time"
         const val ALARM_ACTIVE = "active"
         const val ALARM_NAME = "name"

@@ -1,5 +1,6 @@
 package com.example.wakeupbuddy.activities
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,16 +17,15 @@ import java.util.Calendar
 class SetAlarmActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySetAlarmTimeBinding
+    private lateinit var wkbApp: WakeUpBuddyApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_set_alarm_time)
-
         binding = ActivitySetAlarmTimeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //if the user wants to use the app in a different time zone
-        val wkbApp = applicationContext as WakeUpBuddyApp
+        wkbApp = applicationContext as WakeUpBuddyApp
         val curTime = Calendar.getInstance()
         curTime.timeZone = wkbApp.getTimezone()
         binding.timePicker.setIs24HourView(true)
@@ -37,18 +37,33 @@ class SetAlarmActivity : AppCompatActivity() {
             binding.timePicker.currentMinute = curTime.get(Calendar.MINUTE)
         }
 
-        binding.nextButton.setOnClickListener { view: View ->
-            val parentView = view.parent as ViewGroup
-            val timePicker = parentView.time_picker as TimePicker
-            val alarmNameInput = parentView.alarm_name_input as EditText
+        binding.nextButton.setOnClickListener {
+            val intent = Intent(this@SetAlarmActivity, SetAlarmFriendsActivity::class.java)
+            val name = binding.alarmNameInput.text.toString()
+            intent.putExtra("Name", name)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val hours: Int = binding.timePicker.hour //returns hours in the 24h format
+                val minutes: Int = binding.timePicker.minute
+                intent.putExtra("Time", "$hours:$minutes")
+            } else {
+                val hours: Int = binding.timePicker.currentHour
+                val minutes: Int = binding.timePicker.currentMinute
+                intent.putExtra("Time", "$hours:$minutes")
+            }
+            startActivity(intent)
+            finish()
+        }
+
+        binding.setAlarmButton.setOnClickListener {
+            val alarmNameInput = binding.alarmNameInput
             val alarmName = alarmNameInput.text.toString()
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val hours: Int = timePicker.hour //returns hours in the 24h format
-                wkbApp.getMyAlarmManager().createAlarm(alarmName, hours, timePicker.minute)
+                val hours: Int = binding.timePicker.hour //returns hours in the 24h format
+                wkbApp.getMyAlarmManager().createAlarm(alarmName, hours, binding.timePicker.minute, "")
             } else {
-                val hours: Int = timePicker.currentHour
-                wkbApp.getMyAlarmManager().createAlarm(alarmName, hours, timePicker.currentMinute)
+                val hours: Int = binding.timePicker.currentHour
+                wkbApp.getMyAlarmManager().createAlarm(alarmName, hours, binding.timePicker.currentMinute, "")
             }
             wkbApp.getMyAlarmManager().notifyDataSetChanged()
 

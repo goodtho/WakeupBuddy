@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import com.example.wakeupbuddy.MyFriendGroupManager
 import com.example.wakeupbuddy.R
 import com.example.wakeupbuddy.WakeUpBuddyApp
 import com.example.wakeupbuddy.databinding.FragmentMyFriendsBinding
@@ -21,6 +22,7 @@ class MyFriendsFragment : Fragment() {
     private lateinit var binding: FragmentMyFriendsBinding
     private lateinit var myFriendsManager: MyFriendsManager
     private lateinit var wkbApp: WakeUpBuddyApp
+    private lateinit var myFGM: MyFriendGroupManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +37,7 @@ class MyFriendsFragment : Fragment() {
             startActivity(intent)
         }
         wkbApp = context?.applicationContext as WakeUpBuddyApp
+        myFGM = wkbApp.getMyFriendGroupManager()
         return binding.root
     }
 
@@ -55,7 +58,7 @@ class MyFriendsFragment : Fragment() {
         private var friendList: ArrayList<UserModel>
 
         init {
-            friendList = wkbApp.getFriendsOfCurrentUser()
+            friendList = myFGM.getFriendsOfCurrentUser()
         }
 
         override fun getCount(): Int {
@@ -82,7 +85,7 @@ class MyFriendsFragment : Fragment() {
                 val wkbApp = context.applicationContext as WakeUpBuddyApp
                 val friend = wkbApp.getUser(friendUsername)
                 friendList.remove(friend)
-                wkbApp.deleteFriendConnection(friend!!.id)
+                myFGM.deleteFriendConnection(friend!!.id)
                 this.notifyDataSetChanged()
             }
 
@@ -90,7 +93,7 @@ class MyFriendsFragment : Fragment() {
         }
 
         fun updateFriendList() {
-            friendList = wkbApp.getFriendsOfCurrentUser()
+            friendList = myFGM.getFriendsOfCurrentUser()
         }
 
     }

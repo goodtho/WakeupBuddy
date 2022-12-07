@@ -16,9 +16,10 @@ class WakeUpBuddyApp : Application() {
     private var myAMInitalized: Boolean = false
     private lateinit var myAM: MyAlarmManager
     private lateinit var mySettings: SettingsModel
+    private lateinit var myFGM: MyFriendGroupManager
+    private var myFGMInitialized: Boolean = false
     private var userList: ArrayList<UserModel> = ArrayList()
     private var currentUser: UserModel? = null
-    private var friendList: ArrayList<FriendConnectionModel> = ArrayList()
 
     fun initializeMyAlarmManager(context: Context) {
 
@@ -38,13 +39,22 @@ class WakeUpBuddyApp : Application() {
             ringtone
         )
 
-        myAMInitalized = true
         myAM = MyAlarmManager(context)
+        myAMInitalized = true
+    }
+
+    fun initializeMyFriendGroupManager(context: Context) {
+        myFGM = MyFriendGroupManager(context)
+        myFGMInitialized = true
     }
 
     fun getMyAlarmManager(): MyAlarmManager = myAM
 
     fun myAlarmManagerIsInitialized(): Boolean = myAMInitalized
+
+    fun getMyFriendGroupManager(): MyFriendGroupManager = myFGM
+
+    fun myFriendGroupManagerIsInitialized(): Boolean = myFGMInitialized
 
     fun getAlarmTone(): Ringtone {
         return mySettings.ringtone
@@ -107,6 +117,8 @@ class WakeUpBuddyApp : Application() {
         return null
     }
 
+    fun getUserList(): ArrayList<UserModel> = userList
+
     fun userExists(userID: String): Boolean {
         if (userList.isEmpty()) {
             loadUserList()
@@ -148,69 +160,9 @@ class WakeUpBuddyApp : Application() {
 
     fun getCurrentUser(): UserModel? = currentUser
 
-    private fun loadFriendConnections() {
-        val settings = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
-        val friendConnectionsAsStrings: Set<String>? = settings.getStringSet("FriendConnections", null)
-        friendConnectionsAsStrings?.forEach { connection: String ->
-            val connectionData = connection.split(SPLIT_SYMBOL)
-            friendList.add(FriendConnectionModel(connectionData[0], connectionData[1]))
-        }
-    }
-
-    fun getFriendsOfCurrentUser(): ArrayList<UserModel> {
-        if (friendList.isEmpty()) {
-            loadFriendConnections()
-        }
-
-        val friends = ArrayList<UserModel>()
-        friendList.forEach { con: FriendConnectionModel ->
-            if (con.friend1ID == currentUser?.id || con.friend2ID == currentUser?.id) {
-                val id = if (con.friend1ID != currentUser?.id) con.friend1ID else con.friend2ID
-                friends.add(getUser(id)!!)
-            }
-        }
-        return friends
-    }
-
-    fun getNonFriendsOfCurrentUser(): ArrayList<UserModel> {
-        if (friendList.isEmpty()) {
-            loadFriendConnections()
-        }
-        val nonFriends = userList.minus(getFriendsOfCurrentUser().toSet()) as ArrayList<UserModel>
-        nonFriends.remove(currentUser)
-        return nonFriends
-    }
-
-    fun createNewFriendConnection(friend1ID: String, friend2ID: String) {
-        friendList.add(FriendConnectionModel(friend1ID, friend2ID))
-        persistFriendList()
-    }
-
-    fun deleteFriendConnection(friendID: String) {
-        var i = -1
-        friendList.forEachIndexed() { index: Int, con: FriendConnectionModel ->
-            if (con.friend1ID == friendID && con.friend2ID == currentUser!!.id || con.friend2ID == friendID && con.friend1ID == currentUser!!.id)
-                i = index
-        }
-        if (i >= 0) friendList.removeAt(i)
-        persistFriendList()
-    }
-
-    private fun persistFriendList() {
-        val settings = getSharedPreferences(SHARED_PREFERENCES_NAME, 0)
-        val editor = settings.edit()
-        val connectionsAsString: MutableSet<String> = mutableSetOf()
-        friendList.forEach { connection: FriendConnectionModel ->
-            val userAsString = "${connection.friend1ID}$SPLIT_SYMBOL${connection.friend2ID}"
-            connectionsAsString.add(userAsString)
-        }
-        editor.putStringSet("FriendConnections", connectionsAsString)
-        editor.apply()
-    }
-
     companion object {
         const val SHARED_PREFERENCES_NAME = "UserInfo"
-        private const val SPLIT_SYMBOL = "/-"
+        const val SPLIT_SYMBOL = "/-"
     }
 
 }

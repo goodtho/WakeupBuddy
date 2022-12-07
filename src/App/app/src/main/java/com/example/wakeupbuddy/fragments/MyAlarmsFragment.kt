@@ -42,9 +42,13 @@ class MyAlarmsFragment : Fragment() {
             val alarmListView: ListView = view.alarm_list
             wkbApp.initializeMyAlarmManager(this@MyAlarmsFragment.requireContext())
             alarmListView.adapter = wkbApp.getMyAlarmManager()
+
+            //todo implement only admin can deactivate alarm
         } else {
             view.alarm_list.adapter = wkbApp.getMyAlarmManager()
         }
+
+        wkbApp.initializeMyFriendGroupManager(this@MyAlarmsFragment.requireContext().applicationContext)
 
         val user = wkbApp.getCurrentUser()
         view.home_greeting.text = "Hello${" " + user?.username}!"

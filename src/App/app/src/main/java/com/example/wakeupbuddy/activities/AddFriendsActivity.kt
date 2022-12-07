@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wakeupbuddy.MyFriendGroupManager
 import com.example.wakeupbuddy.R
 import com.example.wakeupbuddy.WakeUpBuddyApp
 import com.example.wakeupbuddy.databinding.ActivityAddFriendBinding
@@ -16,11 +17,18 @@ import java.com.example.wakeupbuddy.models.UserModel
 class AddFriendsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddFriendBinding
     private lateinit var myNonFriendsManager: MyNonFriendsManager
+    private lateinit var myFGM: MyFriendGroupManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddFriendBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val wkbApp = applicationContext as WakeUpBuddyApp
+        if (!wkbApp.myFriendGroupManagerIsInitialized()) {
+            wkbApp.initializeMyFriendGroupManager(this@AddFriendsActivity.applicationContext)
+        }
+        myFGM = wkbApp.getMyFriendGroupManager()
 
         myNonFriendsManager = MyNonFriendsManager(this@AddFriendsActivity)
         binding.contactList.adapter = myNonFriendsManager
@@ -31,12 +39,7 @@ class AddFriendsActivity : AppCompatActivity() {
     }
 
     inner class MyNonFriendsManager(private val context: Context) : BaseAdapter() {
-        private var nonFriendsList: ArrayList<UserModel>
-
-        init {
-            val wkbApp = context.applicationContext as WakeUpBuddyApp
-            nonFriendsList = wkbApp.getNonFriendsOfCurrentUser()
-        }
+        private var nonFriendsList: ArrayList<UserModel> = myFGM.getNonFriendsOfCurrentUser()
 
         override fun getCount(): Int {
             return nonFriendsList.size
@@ -59,7 +62,7 @@ class AddFriendsActivity : AppCompatActivity() {
                 val wkbApp = context.applicationContext as WakeUpBuddyApp
                 val curUser = wkbApp.getCurrentUser()
                 val newFriend = wkbApp.getUser(nonFriendsList[position].username)
-                wkbApp.createNewFriendConnection(curUser!!.id, newFriend!!.id)
+                myFGM.createNewFriendConnection(curUser!!.id, newFriend!!.id)
 
                 view.add_friend_button.setImageResource(R.drawable.ic_baseline_check_circle_24)
                 view.add_friend_button.isClickable = false

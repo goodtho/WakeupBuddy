@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import kotlinx.android.synthetic.main.row_item_alarm.view.*
 import java.com.example.wakeupbuddy.models.AlarmModel
+import java.com.example.wakeupbuddy.models.UserModel
 import java.util.*
 
 
@@ -28,7 +30,7 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         val calendar = Calendar.getInstance()
         calendar.timeZone = wkbApp.getTimezone()
         val time = "${calendar.get(Calendar.HOUR_OF_DAY)}:${calendar.get(Calendar.MINUTE)}"
-        alarmList.add(AlarmModel(name="Alarm 1", time=time, active=0))
+        alarmList.add(AlarmModel(name = "Alarm 1", time = time, active = 0))
 
         alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
@@ -73,21 +75,34 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
                 deactivateAlarm(alarmList[position].id)
             }
         }
+        switchCompat.isChecked = (alarmList[position].active == 1)
 
-        var test = (alarmList[position].active == 1)
-        switchCompat.isChecked = test
+        if (alarmList[position].groupID != "") {
+            val groupMembers =
+                wkbApp.getMyFriendGroupManager().getMembersOfGroup(alarmList[position].groupID)
+            if (groupMembers.isNotEmpty()) {
+                groupMembers.remove(wkbApp.getCurrentUser())
+                var withMembers = "With "
+                groupMembers.forEach { member: UserModel ->
+                    withMembers += member.username
+                }
+                val alarmMember = view.alarm_member
+                alarmMember.text = withMembers
+                alarmMember.visibility = TextView.VISIBLE
+            }
+        }
 
         return view
     }
 
-    fun createAlarm(name: String, hours: Int, minutes: Int) {
+    fun createAlarm(name: String, hours: Int, minutes: Int, group: String) {
         val alarmTime = Calendar.getInstance()
 
         alarmTime.set(Calendar.HOUR_OF_DAY, hours)
         alarmTime.set(Calendar.MINUTE, minutes)
         val time = "$hours:$minutes"
 
-        val alarm = AlarmModel(name=name, time=time, active=1)
+        val alarm = AlarmModel(name = name, time = time, active = 1, groupID = group)
         alarmList.add(alarm)
         activateAlarm(alarmList.size - 1)
 
@@ -101,8 +116,13 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         intent.action = "com.wakeupbuddy.alarm"
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
+        var flags = PendingIntent.FLAG_UPDATE_CURRENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags = flags or PendingIntent.FLAG_IMMUTABLE
+        }
+
         val pendingIntent: PendingIntent =
-            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(context, 0, intent, flags)
 
         val timeData = alarmList[position].time.split(":")
         val time = Calendar.getInstance()
@@ -130,7 +150,11 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
     fun deactivateAlarm(alarm_id: String) {
         val intent = Intent(context, MyBroadcastReceiver::class.java)
         intent.action = "com.wakeupbuddy.alarm"
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getBroadcast(context, 0, intent, 0)
+        }
         alarmManager.cancel(pendingIntent)
 
         if (wkbApp.getAlarmTone().isPlaying) wkbApp.getAlarmTone().stop()
@@ -152,7 +176,8 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
     }
 
     fun snoozeAlarm(alarm_id: String) {
-        val intent = Intent(context.applicationContext, MyBroadcastReceiver::class.java) //or just context
+        val intent =
+            Intent(context.applicationContext, MyBroadcastReceiver::class.java) //or just context
         intent.action = "com.wakeupbuddy.alarm"
         val cancelAlarmPI = PendingIntent.getBroadcast(context, 0, intent, 0)
         alarmManager.cancel(cancelAlarmPI)
@@ -170,7 +195,12 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
 //        intent.action = "com.wakeupbuddy.alarm"
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
 
-        val createAlarmPI = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        var flags = PendingIntent.FLAG_UPDATE_CURRENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags = flags or PendingIntent.FLAG_IMMUTABLE
+        }
+        val createAlarmPI =
+            PendingIntent.getBroadcast(context, 0, intent, flags)
 
 //        val timeData = alarmList[position].time.split(":")
 //        val time = Calendar.getInstance()
