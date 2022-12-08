@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.SetAlarmDevicesActivity"
+    android:background="@color/background">
+
+    <TextView
+        android:id="@+id/my_home_devices_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="40dp"
+        android:text="Home Devices"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/home_appliance_container_1"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/img_2"
+        android:background="@drawable/container_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_home_devices_title" />
+
+    <ImageButton
+        android:id="@+id/home_appliance_container_2"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/img_ceiling_lamp"
+        android:background="@drawable/container_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_home_devices_title" />
+
+    <ImageButton
+        android:id="@+id/home_appliance_container_3"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/img_mini_fridge"
+        android:background="@drawable/container_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_appliance_container_1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/black"
+        android:id="@+id/set_alarm_button"
+        android:text="Set alarm"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

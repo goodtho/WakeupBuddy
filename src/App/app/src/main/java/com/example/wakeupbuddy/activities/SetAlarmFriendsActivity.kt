@@ -66,7 +66,26 @@ class SetAlarmFriendsActivity : AppCompatActivity() {
         }
 
         binding.nextButton.setOnClickListener {
-            //todo forward user to add home appliances activity
+            //create alarm with data from intent (alarm name and time) + group/friends
+            val group = myFGM.createGroup()
+            myFGM.addUserToGroup(wkbApp.getCurrentUser()!!, group)
+            newGroup.forEach { user: UserModel ->
+                myFGM.addUserToGroup(user, group)
+            }
+
+            val extras: Bundle? = intent.extras
+            val alarmName = extras?.getString("Name")
+            val alarmTimeAsStrings = extras?.getString("Time")
+            val hoursMinutes = alarmTimeAsStrings!!.split(':')
+            val hours = hoursMinutes[0].toInt()
+            val minutes = hoursMinutes[1].toInt()
+
+            wkbApp.getMyAlarmManager().createAlarm(alarmName!!, hours, minutes, group.id)
+            wkbApp.getMyAlarmManager().notifyDataSetChanged()
+
+            val intent = Intent(this@SetAlarmFriendsActivity, SetAlarmDevicesActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 

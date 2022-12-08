@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" /> <!-- Needed permission granted by the os to set exact alarms -->
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- Permission to receive broadcast of the boot up completion of the smartphone -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -27,6 +27,9 @@
         </activity>
         <activity
             android:name=".activities.SetAlarmToneActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SetAlarmDevicesActivity"
             android:exported="false" />
         <activity
             android:name=".activities.SetTimezoneActivity"
