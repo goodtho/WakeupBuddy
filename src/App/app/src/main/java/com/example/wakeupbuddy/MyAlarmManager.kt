@@ -13,6 +13,9 @@ import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import kotlinx.android.synthetic.main.row_item_alarm.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.com.example.wakeupbuddy.models.AlarmModel
 import java.com.example.wakeupbuddy.models.UserModel
 import java.util.*
@@ -26,6 +29,7 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
 
     init {
         //todo get all alarms of the user from the database
+        loadAlarms()
 
         val calendar = Calendar.getInstance()
         calendar.timeZone = wkbApp.getTimezone()
@@ -43,6 +47,16 @@ class MyAlarmManager(private val context: Context) : BaseAdapter() {
         //todo sort by activation (1) and time (2)
         //todo make listview scrollable, currently: to many alarms -> layout broken
 
+    }
+
+    private fun loadAlarms() = runBlocking {
+        val test = launch {
+            val api = wkbApp.getApi()
+            val res = api.getAllAlarms()
+            println(res)
+            val list = res.body()
+        }
+        test.join()
     }
 
     override fun getCount(): Int {
